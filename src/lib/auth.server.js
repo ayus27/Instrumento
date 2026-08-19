@@ -31,10 +31,11 @@ async function sha256(value) {
 export async function createSession(userId) {
   const raw = crypto.randomUUID() + crypto.randomUUID();
   const tokenHash = await sha256(raw);
+  const expiresAt = new Date(Date.now() + SESSION_DAYS * 24 * 60 * 60 * 1000).toISOString();
   const sql = db();
   await sql`
     insert into sessions (token_hash, user_id, expires_at)
-    values (${tokenHash}, ${userId}, now() + interval '${SESSION_DAYS} days')
+    values (${tokenHash}, ${userId}, ${expiresAt})
   `;
   return raw;
 }
