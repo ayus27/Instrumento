@@ -1,0 +1,150 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+/*
+ * Instrumento design system — studio hardware, not SaaS dashboard.
+ * Ink-dark panels, bone key surfaces, single warm signal-amber accent,
+ * mono labels in uppercase, square-ish geometry, minimal shadow.
+ */
+
+@theme inline {
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 3px);
+  --radius-2xl: calc(var(--radius) + 6px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-panel: var(--panel);
+  --color-panel-edge: var(--panel-edge);
+  --color-key-white: var(--key-white);
+  --color-key-black: var(--key-black);
+  --color-signal: var(--signal);
+  --color-signal-dim: var(--signal-dim);
+  --color-flat: var(--flat);
+  --color-sharp: var(--sharp);
+  --color-intune: var(--intune);
+}
+
+:root {
+  --radius: 4px;
+
+  --background: oklch(0.17 0.008 60);
+  --foreground: oklch(0.94 0.012 85);
+  --card: oklch(0.22 0.009 60);
+  --card-foreground: oklch(0.94 0.012 85);
+  --popover: oklch(0.2 0.009 60);
+  --popover-foreground: oklch(0.94 0.012 85);
+
+  --primary: oklch(0.76 0.16 62);
+  --primary-foreground: oklch(0.18 0.02 60);
+  --secondary: oklch(0.27 0.01 60);
+  --secondary-foreground: oklch(0.93 0.012 85);
+  --muted: oklch(0.25 0.008 60);
+  --muted-foreground: oklch(0.68 0.014 75);
+  --accent: oklch(0.3 0.02 60);
+  --accent-foreground: oklch(0.95 0.012 85);
+  --destructive: oklch(0.58 0.2 25);
+  --destructive-foreground: oklch(0.97 0.01 85);
+  --border: oklch(0.3 0.01 60);
+  --input: oklch(0.3 0.01 60);
+  --ring: oklch(0.76 0.16 62);
+
+  --panel: oklch(0.21 0.008 60);
+  --panel-edge: oklch(0.32 0.012 60);
+  --key-white: oklch(0.94 0.014 90);
+  --key-black: oklch(0.21 0.01 60);
+  --signal: oklch(0.76 0.16 62);
+  --signal-dim: oklch(0.45 0.08 62);
+  --flat: oklch(0.72 0.14 250);
+  --sharp: oklch(0.66 0.19 25);
+  --intune: oklch(0.78 0.17 145);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    background-image:
+      linear-gradient(oklch(1 0 0 / 2.5%) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(1 0 0 / 2.5%) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+@utility panel {
+  background-color: var(--color-panel);
+  border: 1px solid var(--color-panel-edge);
+}
+
+@utility hairline {
+  border-bottom: 1px solid var(--color-border);
+}
+
+@keyframes rec-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@utility rec-dot {
+  animation: rec-pulse 1s steps(2, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
