@@ -13,9 +13,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentLoginRouteImport } from './routes/agent-login'
 import { Route as DrumsRouteImport } from './routes/drums'
 import { Route as GuitarRouteImport } from './routes/guitar'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PianoRouteImport } from './routes/piano'
 import { Route as RecordingsRouteImport } from './routes/recordings'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as UkuleleRouteImport } from './routes/ukulele'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -49,6 +51,11 @@ const GuitarRoute = GuitarRouteImport.update({
   path: '/guitar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
@@ -62,6 +69,11 @@ const PianoRoute = PianoRouteImport.update({
 const RecordingsRoute = RecordingsRouteImport.update({
   id: '/recordings',
   path: '/recordings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UkuleleRoute = UkuleleRouteImport.update({
@@ -133,9 +145,11 @@ export interface FileRoutesByFullPath {
   '/agent-login': typeof AgentLoginRoute
   '/drums': typeof DrumsRoute
   '/guitar': typeof GuitarRoute
+  '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
+  '/signup': typeof SignupRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -154,9 +168,11 @@ export interface FileRoutesByTo {
   '/agent-login': typeof AgentLoginRoute
   '/drums': typeof DrumsRoute
   '/guitar': typeof GuitarRoute
+  '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
+  '/signup': typeof SignupRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -176,9 +192,11 @@ export interface FileRoutesById {
   '/agent-login': typeof AgentLoginRoute
   '/drums': typeof DrumsRoute
   '/guitar': typeof GuitarRoute
+  '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
+  '/signup': typeof SignupRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -199,9 +217,11 @@ export interface FileRouteTypes {
     | '/agent-login'
     | '/drums'
     | '/guitar'
+    | '/login'
     | '/mcp'
     | '/piano'
     | '/recordings'
+    | '/signup'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -220,9 +240,11 @@ export interface FileRouteTypes {
     | '/agent-login'
     | '/drums'
     | '/guitar'
+    | '/login'
     | '/mcp'
     | '/piano'
     | '/recordings'
+    | '/signup'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -241,9 +263,11 @@ export interface FileRouteTypes {
     | '/agent-login'
     | '/drums'
     | '/guitar'
+    | '/login'
     | '/mcp'
     | '/piano'
     | '/recordings'
+    | '/signup'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -263,9 +287,11 @@ export interface RootRouteChildren {
   AgentLoginRoute: typeof AgentLoginRoute
   DrumsRoute: typeof DrumsRoute
   GuitarRoute: typeof GuitarRoute
+  LoginRoute: typeof LoginRoute
   McpRoute: typeof McpRoute
   PianoRoute: typeof PianoRoute
   RecordingsRoute: typeof RecordingsRoute
+  SignupRoute: typeof SignupRoute
   UkuleleRoute: typeof UkuleleRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -310,6 +336,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuitarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/mcp': {
       id: '/mcp'
       path: '/mcp'
@@ -329,6 +362,13 @@ declare module '@tanstack/react-router' {
       path: '/recordings'
       fullPath: '/recordings'
       preLoaderRoute: typeof RecordingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ukulele': {
@@ -423,9 +463,11 @@ const rootRouteChildren: RootRouteChildren = {
   AgentLoginRoute: AgentLoginRoute,
   DrumsRoute: DrumsRoute,
   GuitarRoute: GuitarRoute,
+  LoginRoute: LoginRoute,
   McpRoute: McpRoute,
   PianoRoute: PianoRoute,
   RecordingsRoute: RecordingsRoute,
+  SignupRoute: SignupRoute,
   UkuleleRoute: UkuleleRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
