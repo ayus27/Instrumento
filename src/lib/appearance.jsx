@@ -19,7 +19,7 @@ const STORAGE_KEY = "instrumento.appearance";
 
 const AppearanceContext = createContext({
   appearance: DEFAULTS,
-  setAppearance: () => {},
+  setAppearance: (_patch, _options) => {},
 });
 
 function resolveTheme(theme) {
