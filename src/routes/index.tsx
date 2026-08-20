@@ -40,7 +40,7 @@ function Index() {
           Instru
           <span style={{ color: "var(--signal)" }}>mento</span>
         </h1>
-        <p className="label-mono mt-4">Four instruments · Two tuners · Live in your browser</p>
+        <p className="label-mono mt-4">All your Instruments are right here. Start Jamming!</p>
       </section>
 
       <section className="pt-8">
