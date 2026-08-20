@@ -7,8 +7,12 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useCallback, useEffect, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/sonner";
+import { AppearanceProvider, useAppearance } from "@/lib/appearance";
+import { AuthProvider } from "@/lib/auth-client";
+import { AppearanceMenu } from "@/components/AppearanceMenu";
+import { AccountMenu } from "@/components/AccountMenu";
 
 
 import appCss from "../styles.css?url";
@@ -134,33 +138,56 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col">
-        <header className="hairline sticky top-0 z-30 backdrop-blur-sm" style={{ backgroundColor: "oklch(0.17 0.008 60 / 88%)" }}>
-          <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-5 py-3">
-            <Link to="/" className="font-display text-lg uppercase tracking-[0.18em]">
-              Instru<span style={{ color: "var(--signal)" }}>mento</span>
-            </Link>
-            <nav className="flex flex-wrap items-center gap-x-4 gap-y-1">
-              {NAV.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className="label-mono transition-colors hover:text-foreground"
-                  activeProps={{ style: { color: "var(--signal)" } }}
-                >
-                  {item.label}
+      <AppearanceProvider>
+        <AuthBridge>
+          <div className="flex min-h-screen flex-col">
+            <header
+              className="hairline sticky top-0 z-30 backdrop-blur-sm"
+              style={{ backgroundColor: "color-mix(in oklch, var(--background) 88%, transparent)" }}
+            >
+              <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-5 py-3">
+                <Link to="/" className="font-display text-lg uppercase tracking-[0.18em]">
+                  Instru<span style={{ color: "var(--signal)" }}>mento</span>
                 </Link>
-              ))}
-            </nav>
+                <nav className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                  {NAV.map((item) => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      className="label-mono transition-colors hover:text-foreground"
+                      activeProps={{ style: { color: "var(--signal)" } }}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </nav>
+                <div className="ml-auto flex items-center gap-3">
+                  <AppearanceMenu />
+                  <AccountMenu />
+                </div>
+              </div>
+            </header>
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <main className="flex-1">
+              <Outlet />
+            </main>
           </div>
-        </header>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <main className="flex-1">
-          <Outlet />
-        </main>
-      </div>
+        </AuthBridge>
+      </AppearanceProvider>
       <Toaster position="bottom-right" />
     </QueryClientProvider>
   );
+}
+
+// Syncs account-stored appearance preferences into the appearance context on sign-in.
+function AuthBridge({ children }: { children: ReactNode }) {
+  const { setAppearance } = useAppearance();
+  const onPreferences = useCallback(
+    (prefs: { theme: string; primary_color: string; accent_color: string }) => {
+      setAppearance(prefs, { persistToAccount: false });
+    },
+    [setAppearance],
+  );
+  return <AuthProvider onPreferences={onPreferences}>{children}</AuthProvider>;
 }
 
