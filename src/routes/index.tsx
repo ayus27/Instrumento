@@ -21,15 +21,15 @@ export const Route = createFileRoute("/")({
 });
 
 const INSTRUMENTS = [
-  { to: "/piano", name: "Piano", detail: "3 tones · sustain · 17 keys mapped" },
-  { to: "/guitar", name: "Guitar", detail: "EADGBE · acoustic / electric" },
-  { to: "/drums", name: "Drums", detail: "7 pads · tempo locked" },
-  { to: "/ukulele", name: "Ukulele", detail: "GCEA · strum + pluck" },
+  { to: "/piano", name: "Piano", detail: "" },
+  { to: "/guitar", name: "Guitar", detail: "" },
+  { to: "/drums", name: "Drums", detail: "" },
+  { to: "/ukulele", name: "Ukulele", detail: "" },
 ] as const;
 
 const TUNERS = [
-  { to: "/tuners/guitar", name: "Guitar Tuner", detail: "E2 A2 D3 G3 B3 E4" },
-  { to: "/tuners/ukulele", name: "Ukulele Tuner", detail: "G4 C4 E4 A4" },
+  { to: "/tuners/guitar", name: "Guitar Tuner", detail: "" },
+  { to: "/tuners/ukulele", name: "Ukulele Tuner", detail: "" },
 ] as const;
 
 function Index() {
