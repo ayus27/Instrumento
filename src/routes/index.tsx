@@ -76,7 +76,7 @@ function Index() {
       </section>
 
       <p className="label-mono mt-10">
-        Saved takes live under <Link to="/recordings" className="underline">Recordings</Link>.
+        Hi! Your friend Ayus made this. Here are your beats -  <Link to="/recordings" className="underline">Recordings</Link>.
       </p>
     </div>
   );
