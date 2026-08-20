@@ -8,7 +8,7 @@ function safeNext(value: unknown): string {
   return typeof value === "string" && value.startsWith("/") && !value.startsWith("//") ? value : "/";
 }
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute("/agent-login")({
   ssr: false,
   head: () => ({
     meta: [

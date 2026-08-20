@@ -10,9 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgentLoginRouteImport } from './routes/agent-login'
 import { Route as DrumsRouteImport } from './routes/drums'
 import { Route as GuitarRouteImport } from './routes/guitar'
-import { Route as LoginRouteImport } from './routes/login'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PianoRouteImport } from './routes/piano'
 import { Route as RecordingsRouteImport } from './routes/recordings'
@@ -34,6 +34,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgentLoginRoute = AgentLoginRouteImport.update({
+  id: '/agent-login',
+  path: '/agent-login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DrumsRoute = DrumsRouteImport.update({
   id: '/drums',
   path: '/drums',
@@ -42,11 +47,6 @@ const DrumsRoute = DrumsRouteImport.update({
 const GuitarRoute = GuitarRouteImport.update({
   id: '/guitar',
   path: '/guitar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const McpRoute = McpRouteImport.update({
@@ -130,9 +130,9 @@ const ApiAuthSignupRoute = ApiAuthSignupRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agent-login': typeof AgentLoginRoute
   '/drums': typeof DrumsRoute
   '/guitar': typeof GuitarRoute
-  '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
@@ -151,9 +151,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agent-login': typeof AgentLoginRoute
   '/drums': typeof DrumsRoute
   '/guitar': typeof GuitarRoute
-  '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
@@ -173,9 +173,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agent-login': typeof AgentLoginRoute
   '/drums': typeof DrumsRoute
   '/guitar': typeof GuitarRoute
-  '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
@@ -196,9 +196,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/agent-login'
     | '/drums'
     | '/guitar'
-    | '/login'
     | '/mcp'
     | '/piano'
     | '/recordings'
@@ -217,9 +217,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/agent-login'
     | '/drums'
     | '/guitar'
-    | '/login'
     | '/mcp'
     | '/piano'
     | '/recordings'
@@ -238,9 +238,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/agent-login'
     | '/drums'
     | '/guitar'
-    | '/login'
     | '/mcp'
     | '/piano'
     | '/recordings'
@@ -260,9 +260,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgentLoginRoute: typeof AgentLoginRoute
   DrumsRoute: typeof DrumsRoute
   GuitarRoute: typeof GuitarRoute
-  LoginRoute: typeof LoginRoute
   McpRoute: typeof McpRoute
   PianoRoute: typeof PianoRoute
   RecordingsRoute: typeof RecordingsRoute
@@ -289,6 +289,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agent-login': {
+      id: '/agent-login'
+      path: '/agent-login'
+      fullPath: '/agent-login'
+      preLoaderRoute: typeof AgentLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/drums': {
       id: '/drums'
       path: '/drums'
@@ -301,13 +308,6 @@ declare module '@tanstack/react-router' {
       path: '/guitar'
       fullPath: '/guitar'
       preLoaderRoute: typeof GuitarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mcp': {
@@ -420,9 +420,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgentLoginRoute: AgentLoginRoute,
   DrumsRoute: DrumsRoute,
   GuitarRoute: GuitarRoute,
-  LoginRoute: LoginRoute,
   McpRoute: McpRoute,
   PianoRoute: PianoRoute,
   RecordingsRoute: RecordingsRoute,
