@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Piano, guitar, drums and ukulele in the browser with real audio, recording, metronome and tuners.",
+          "All your Instruments are right here. Start Jamming!",
       },
     ],
   }),
