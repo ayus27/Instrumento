@@ -148,3 +148,77 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---------------------------------------------------------------
+ * Appearance system — light/dark themes + muted primary/accent
+ * options. Dark + amber is the original default and stays unchanged.
+ * --------------------------------------------------------------- */
+
+:root[data-theme="light"] {
+  --background: oklch(0.96 0.006 85);
+  --foreground: oklch(0.24 0.012 60);
+  --card: oklch(0.99 0.004 85);
+  --card-foreground: oklch(0.24 0.012 60);
+  --popover: oklch(0.99 0.004 85);
+  --popover-foreground: oklch(0.24 0.012 60);
+
+  --secondary: oklch(0.91 0.006 85);
+  --secondary-foreground: oklch(0.26 0.012 60);
+  --muted: oklch(0.92 0.006 85);
+  --muted-foreground: oklch(0.46 0.012 70);
+  --accent: oklch(0.9 0.008 85);
+  --accent-foreground: oklch(0.24 0.012 60);
+  --border: oklch(0.85 0.008 80);
+  --input: oklch(0.85 0.008 80);
+
+  --panel: oklch(0.98 0.004 85);
+  --panel-edge: oklch(0.86 0.008 80);
+  --key-white: oklch(0.99 0.004 90);
+  --key-black: oklch(0.28 0.01 60);
+}
+
+:root[data-theme="light"] body {
+  background-image:
+    linear-gradient(oklch(0 0 0 / 4%) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0 0 0 / 4%) 1px, transparent 1px);
+}
+
+/* Primary colour choices (buttons, focus rings) */
+:root[data-primary="slate"] {
+  --primary: oklch(0.6 0.035 250);
+  --primary-foreground: oklch(0.98 0.005 250);
+  --ring: oklch(0.6 0.035 250);
+}
+:root[data-primary="indigo"] {
+  --primary: oklch(0.58 0.08 275);
+  --primary-foreground: oklch(0.98 0.005 275);
+  --ring: oklch(0.58 0.08 275);
+}
+:root[data-primary="sage"] {
+  --primary: oklch(0.64 0.055 150);
+  --primary-foreground: oklch(0.16 0.02 150);
+  --ring: oklch(0.64 0.055 150);
+}
+:root[data-primary="rose"] {
+  --primary: oklch(0.63 0.07 15);
+  --primary-foreground: oklch(0.98 0.005 15);
+  --ring: oklch(0.63 0.07 15);
+}
+
+/* Accent colour choices (signal highlights, active nav, meters) */
+:root[data-accent="slate"] {
+  --signal: oklch(0.64 0.04 250);
+  --signal-dim: oklch(0.42 0.03 250);
+}
+:root[data-accent="indigo"] {
+  --signal: oklch(0.62 0.08 275);
+  --signal-dim: oklch(0.4 0.05 275);
+}
+:root[data-accent="sage"] {
+  --signal: oklch(0.66 0.06 150);
+  --signal-dim: oklch(0.43 0.04 150);
+}
+:root[data-accent="rose"] {
+  --signal: oklch(0.66 0.075 15);
+  --signal-dim: oklch(0.44 0.05 15);
+}
