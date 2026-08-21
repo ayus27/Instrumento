@@ -30,20 +30,25 @@ export function PianoKeyboard({
       {whites.map((midi, index) => {
         const note = midiToName(midi);
         const on = active.includes(note);
+        const target = targets.includes(note);
         return (
           <button
             key={note}
             type="button"
             aria-label={`Play ${note}`}
             aria-pressed={on}
+            data-target={target || undefined}
             className="absolute top-0 flex h-full flex-col justify-end border border-panel-edge pb-3 transition-[transform,filter] duration-75 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-signal"
             style={{
               left: `${index * whiteWidth}%`,
               width: `${whiteWidth}%`,
               background: on
                 ? "linear-gradient(180deg, var(--key-white) 40%, var(--signal))"
-                : "linear-gradient(180deg, var(--key-white), oklch(0.86 0.014 90))",
+                : target
+                  ? "linear-gradient(180deg, var(--key-white) 55%, var(--signal-dim))"
+                  : "linear-gradient(180deg, var(--key-white), oklch(0.86 0.014 90))",
               transform: on ? "translateY(2px)" : undefined,
+              boxShadow: target ? "inset 0 0 0 3px var(--signal)" : undefined,
             }}
             onPointerDown={(e) => {
               e.currentTarget.setPointerCapture(e.pointerId);
@@ -58,6 +63,7 @@ export function PianoKeyboard({
           </button>
         );
       })}
+
 
       {midis
         .filter((m) => isSharp(m))
