@@ -7,6 +7,8 @@ type Props = {
   keyLabels: Record<string, string>;
   onNoteOn: (note: string) => void;
   onNoteOff: (note: string) => void;
+  /** Practice mode only: keys the learner is being asked to play. */
+  targets?: string[];
 };
 
 export function PianoKeyboard({
@@ -16,10 +18,12 @@ export function PianoKeyboard({
   keyLabels,
   onNoteOn,
   onNoteOff,
+  targets = [],
 }: Props) {
   const midis = Array.from({ length: keyCount }, (_, i) => startMidi + i);
   const whites = midis.filter((m) => !isSharp(m));
   const whiteWidth = 100 / whites.length;
+
 
   return (
     <div className="relative h-56 w-full select-none sm:h-72" role="group" aria-label="Piano keys">
