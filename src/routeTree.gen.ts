@@ -22,6 +22,7 @@ import { Route as UkuleleRouteImport } from './routes/ukulele'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as ApiPreferencesRouteImport } from './routes/api/preferences'
+import { Route as PracticeIndexRouteImport } from './routes/practice.index'
 import { Route as TunersGuitarRouteImport } from './routes/tuners.guitar'
 import { Route as TunersUkuleleRouteImport } from './routes/tuners.ukulele'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -30,6 +31,8 @@ import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
 import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
 import { Route as ApiAuthMeRouteImport } from './routes/api/auth/me'
 import { Route as ApiAuthSignupRouteImport } from './routes/api/auth/signup'
+import { Route as PracticeDrumsLearnRouteImport } from './routes/practice.drums.learn'
+import { Route as PracticePianoLearnRouteImport } from './routes/practice.piano.learn'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -98,6 +101,11 @@ const ApiPreferencesRoute = ApiPreferencesRouteImport.update({
   path: '/api/preferences',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PracticeIndexRoute = PracticeIndexRouteImport.update({
+  id: '/practice/',
+  path: '/practice/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TunersGuitarRoute = TunersGuitarRouteImport.update({
   id: '/tuners/guitar',
   path: '/tuners/guitar',
@@ -139,6 +147,16 @@ const ApiAuthSignupRoute = ApiAuthSignupRouteImport.update({
   path: '/api/auth/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PracticeDrumsLearnRoute = PracticeDrumsLearnRouteImport.update({
+  id: '/practice/drums/learn',
+  path: '/practice/drums/learn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PracticePianoLearnRoute = PracticePianoLearnRouteImport.update({
+  id: '/practice/piano/learn',
+  path: '/practice/piano/learn',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -156,12 +174,15 @@ export interface FileRoutesByFullPath {
   '/api/preferences': typeof ApiPreferencesRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/practice/': typeof PracticeIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/me': typeof ApiAuthMeRoute
   '/api/auth/signup': typeof ApiAuthSignupRoute
+  '/practice/drums/learn': typeof PracticeDrumsLearnRoute
+  '/practice/piano/learn': typeof PracticePianoLearnRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -179,12 +200,15 @@ export interface FileRoutesByTo {
   '/api/preferences': typeof ApiPreferencesRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/practice': typeof PracticeIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/me': typeof ApiAuthMeRoute
   '/api/auth/signup': typeof ApiAuthSignupRoute
+  '/practice/drums/learn': typeof PracticeDrumsLearnRoute
+  '/practice/piano/learn': typeof PracticePianoLearnRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -203,12 +227,15 @@ export interface FileRoutesById {
   '/api/preferences': typeof ApiPreferencesRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/practice/': typeof PracticeIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/me': typeof ApiAuthMeRoute
   '/api/auth/signup': typeof ApiAuthSignupRoute
+  '/practice/drums/learn': typeof PracticeDrumsLearnRoute
+  '/practice/piano/learn': typeof PracticePianoLearnRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -228,12 +255,15 @@ export interface FileRouteTypes {
     | '/api/preferences'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/practice/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/me'
     | '/api/auth/signup'
+    | '/practice/drums/learn'
+    | '/practice/piano/learn'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -251,12 +281,15 @@ export interface FileRouteTypes {
     | '/api/preferences'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/practice'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/me'
     | '/api/auth/signup'
+    | '/practice/drums/learn'
+    | '/practice/piano/learn'
   id:
     | '__root__'
     | '/'
@@ -274,12 +307,15 @@ export interface FileRouteTypes {
     | '/api/preferences'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/practice/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/me'
     | '/api/auth/signup'
+    | '/practice/drums/learn'
+    | '/practice/piano/learn'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -298,12 +334,15 @@ export interface RootRouteChildren {
   ApiPreferencesRoute: typeof ApiPreferencesRoute
   TunersGuitarRoute: typeof TunersGuitarRoute
   TunersUkuleleRoute: typeof TunersUkuleleRoute
+  PracticeIndexRoute: typeof PracticeIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
   ApiAuthMeRoute: typeof ApiAuthMeRoute
   ApiAuthSignupRoute: typeof ApiAuthSignupRoute
+  PracticeDrumsLearnRoute: typeof PracticeDrumsLearnRoute
+  PracticePianoLearnRoute: typeof PracticePianoLearnRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -399,6 +438,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPreferencesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/practice/': {
+      id: '/practice/'
+      path: '/practice'
+      fullPath: '/practice/'
+      preLoaderRoute: typeof PracticeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tuners/guitar': {
       id: '/tuners/guitar'
       path: '/tuners/guitar'
@@ -455,6 +501,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/practice/drums/learn': {
+      id: '/practice/drums/learn'
+      path: '/practice/drums/learn'
+      fullPath: '/practice/drums/learn'
+      preLoaderRoute: typeof PracticeDrumsLearnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/practice/piano/learn': {
+      id: '/practice/piano/learn'
+      path: '/practice/piano/learn'
+      fullPath: '/practice/piano/learn'
+      preLoaderRoute: typeof PracticePianoLearnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -475,12 +535,15 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPreferencesRoute: ApiPreferencesRoute,
   TunersGuitarRoute: TunersGuitarRoute,
   TunersUkuleleRoute: TunersUkuleleRoute,
+  PracticeIndexRoute: PracticeIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,
   ApiAuthMeRoute: ApiAuthMeRoute,
   ApiAuthSignupRoute: ApiAuthSignupRoute,
+  PracticeDrumsLearnRoute: PracticeDrumsLearnRoute,
+  PracticePianoLearnRoute: PracticePianoLearnRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
