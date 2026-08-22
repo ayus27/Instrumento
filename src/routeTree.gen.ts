@@ -31,6 +31,7 @@ import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
 import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
 import { Route as ApiAuthMeRouteImport } from './routes/api/auth/me'
 import { Route as ApiAuthSignupRouteImport } from './routes/api/auth/signup'
+import { Route as PracticeDrumsLearnRouteImport } from './routes/practice.drums.learn'
 import { Route as PracticePianoLearnRouteImport } from './routes/practice.piano.learn'
 
 const IndexRoute = IndexRouteImport.update({
@@ -146,6 +147,11 @@ const ApiAuthSignupRoute = ApiAuthSignupRouteImport.update({
   path: '/api/auth/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PracticeDrumsLearnRoute = PracticeDrumsLearnRouteImport.update({
+  id: '/practice/drums/learn',
+  path: '/practice/drums/learn',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PracticePianoLearnRoute = PracticePianoLearnRouteImport.update({
   id: '/practice/piano/learn',
   path: '/practice/piano/learn',
@@ -175,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/me': typeof ApiAuthMeRoute
   '/api/auth/signup': typeof ApiAuthSignupRoute
+  '/practice/drums/learn': typeof PracticeDrumsLearnRoute
   '/practice/piano/learn': typeof PracticePianoLearnRoute
 }
 export interface FileRoutesByTo {
@@ -200,6 +207,7 @@ export interface FileRoutesByTo {
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/me': typeof ApiAuthMeRoute
   '/api/auth/signup': typeof ApiAuthSignupRoute
+  '/practice/drums/learn': typeof PracticeDrumsLearnRoute
   '/practice/piano/learn': typeof PracticePianoLearnRoute
 }
 export interface FileRoutesById {
@@ -226,6 +234,7 @@ export interface FileRoutesById {
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/me': typeof ApiAuthMeRoute
   '/api/auth/signup': typeof ApiAuthSignupRoute
+  '/practice/drums/learn': typeof PracticeDrumsLearnRoute
   '/practice/piano/learn': typeof PracticePianoLearnRoute
 }
 export interface FileRouteTypes {
@@ -253,6 +262,7 @@ export interface FileRouteTypes {
     | '/api/auth/logout'
     | '/api/auth/me'
     | '/api/auth/signup'
+    | '/practice/drums/learn'
     | '/practice/piano/learn'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -278,6 +288,7 @@ export interface FileRouteTypes {
     | '/api/auth/logout'
     | '/api/auth/me'
     | '/api/auth/signup'
+    | '/practice/drums/learn'
     | '/practice/piano/learn'
   id:
     | '__root__'
@@ -303,6 +314,7 @@ export interface FileRouteTypes {
     | '/api/auth/logout'
     | '/api/auth/me'
     | '/api/auth/signup'
+    | '/practice/drums/learn'
     | '/practice/piano/learn'
   fileRoutesById: FileRoutesById
 }
@@ -329,6 +341,7 @@ export interface RootRouteChildren {
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
   ApiAuthMeRoute: typeof ApiAuthMeRoute
   ApiAuthSignupRoute: typeof ApiAuthSignupRoute
+  PracticeDrumsLearnRoute: typeof PracticeDrumsLearnRoute
   PracticePianoLearnRoute: typeof PracticePianoLearnRoute
 }
 
@@ -488,6 +501,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/practice/drums/learn': {
+      id: '/practice/drums/learn'
+      path: '/practice/drums/learn'
+      fullPath: '/practice/drums/learn'
+      preLoaderRoute: typeof PracticeDrumsLearnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/practice/piano/learn': {
       id: '/practice/piano/learn'
       path: '/practice/piano/learn'
@@ -522,6 +542,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,
   ApiAuthMeRoute: ApiAuthMeRoute,
   ApiAuthSignupRoute: ApiAuthSignupRoute,
+  PracticeDrumsLearnRoute: PracticeDrumsLearnRoute,
   PracticePianoLearnRoute: PracticePianoLearnRoute,
 }
 export const routeTree = rootRouteImport
