@@ -22,6 +22,7 @@ import { Route as UkuleleRouteImport } from './routes/ukulele'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as ApiPreferencesRouteImport } from './routes/api/preferences'
+import { Route as PracticeIndexRouteImport } from './routes/practice.index'
 import { Route as TunersGuitarRouteImport } from './routes/tuners.guitar'
 import { Route as TunersUkuleleRouteImport } from './routes/tuners.ukulele'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -98,6 +99,11 @@ const ApiPreferencesRoute = ApiPreferencesRouteImport.update({
   path: '/api/preferences',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PracticeIndexRoute = PracticeIndexRouteImport.update({
+  id: '/practice/',
+  path: '/practice/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TunersGuitarRoute = TunersGuitarRouteImport.update({
   id: '/tuners/guitar',
   path: '/tuners/guitar',
@@ -156,6 +162,7 @@ export interface FileRoutesByFullPath {
   '/api/preferences': typeof ApiPreferencesRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/practice/': typeof PracticeIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -179,6 +186,7 @@ export interface FileRoutesByTo {
   '/api/preferences': typeof ApiPreferencesRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/practice': typeof PracticeIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -203,6 +211,7 @@ export interface FileRoutesById {
   '/api/preferences': typeof ApiPreferencesRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/practice/': typeof PracticeIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -228,6 +237,7 @@ export interface FileRouteTypes {
     | '/api/preferences'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/practice/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/auth/login'
@@ -251,6 +261,7 @@ export interface FileRouteTypes {
     | '/api/preferences'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/practice'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/auth/login'
@@ -274,6 +285,7 @@ export interface FileRouteTypes {
     | '/api/preferences'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/practice/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/auth/login'
@@ -298,6 +310,7 @@ export interface RootRouteChildren {
   ApiPreferencesRoute: typeof ApiPreferencesRoute
   TunersGuitarRoute: typeof TunersGuitarRoute
   TunersUkuleleRoute: typeof TunersUkuleleRoute
+  PracticeIndexRoute: typeof PracticeIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
@@ -399,6 +412,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPreferencesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/practice/': {
+      id: '/practice/'
+      path: '/practice'
+      fullPath: '/practice/'
+      preLoaderRoute: typeof PracticeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tuners/guitar': {
       id: '/tuners/guitar'
       path: '/tuners/guitar'
@@ -475,6 +495,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPreferencesRoute: ApiPreferencesRoute,
   TunersGuitarRoute: TunersGuitarRoute,
   TunersUkuleleRoute: TunersUkuleleRoute,
+  PracticeIndexRoute: PracticeIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiAuthLoginRoute: ApiAuthLoginRoute,
