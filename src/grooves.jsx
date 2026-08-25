@@ -42,8 +42,12 @@ function GrooveGeneratorPage() {
 
   const drumInst = useInstrument("drums");
   const timerRef = useRef(null);
+  const gridRef = useRef(grid);
+  gridRef.current = grid;
 
-  const toggleStep = (laneId, stepIdx) => {
+  const toggleStep = async (laneId, stepIdx) => {
+    await drumInst.ensure();
+    drumInst.hit(laneId);
     setGrid((prev) => {
       const copy = { ...prev };
       copy[laneId] = [...copy[laneId]];
@@ -74,13 +78,13 @@ function GrooveGeneratorPage() {
     } else {
       await drumInst.ensure();
       let step = 0;
-      const stepDurationMs = (60 / bpm) * 1000 / 4;
+      const stepDurationMs = ((60 / bpm) * 1000) / 4;
 
       timerRef.current = setInterval(() => {
         setCurrentStep(step);
 
         LANES.forEach((lane) => {
-          if (grid[lane.id]?.[step]) {
+          if (gridRef.current[lane.id]?.[step]) {
             drumInst.hit(lane.id);
           }
         });
@@ -123,6 +127,7 @@ function GrooveGeneratorPage() {
         </div>
       </header>
 
+      {/* BPM bar */}
       <div className="panel p-4 flex items-center justify-between">
         <label className="flex items-center gap-3">
           <span className="label-mono">TEMPO</span>
@@ -140,12 +145,16 @@ function GrooveGeneratorPage() {
         <span className="label-mono text-muted-foreground">16 SIXTEENTH STEPS</span>
       </div>
 
+      {/* Sequencer Grid */}
       <div className="panel p-5 overflow-x-auto">
         <div className="min-w-[640px] space-y-3">
           {LANES.map((lane) => (
             <div key={lane.id} className="flex items-center gap-4">
               <span className="label-mono w-24 shrink-0 font-bold">{lane.name}</span>
-              <div className="grid flex-1 grid-cols-16 gap-1.5">
+              <div
+                className="grid flex-1 gap-1.5"
+                style={{ gridTemplateColumns: "repeat(16, minmax(0, 1fr))" }}
+              >
                 {grid[lane.id].map((active, stepIdx) => {
                   const isCurrent = stepIdx === currentStep;
                   return (
@@ -165,9 +174,13 @@ function GrooveGeneratorPage() {
             </div>
           ))}
 
+          {/* Step Numbers Header */}
           <div className="flex items-center gap-4 pt-2">
             <span className="w-24 shrink-0" />
-            <div className="grid flex-1 grid-cols-16 gap-1.5">
+            <div
+              className="grid flex-1 gap-1.5"
+              style={{ gridTemplateColumns: "repeat(16, minmax(0, 1fr))" }}
+            >
               {Array.from({ length: 16 }, (_, i) => (
                 <span
                   key={i}
