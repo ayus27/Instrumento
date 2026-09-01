@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentLoginRouteImport } from './routes/agent-login'
 import { Route as ChordsRouteImport } from './routes/chords'
 import { Route as DrumsRouteImport } from './routes/drums'
+import { Route as GroovesRouteImport } from './routes/grooves'
 import { Route as GuitarRouteImport } from './routes/guitar'
 import { Route as JamRouteImport } from './routes/jam'
 import { Route as LoginRouteImport } from './routes/login'
@@ -59,6 +60,11 @@ const ChordsRoute = ChordsRouteImport.update({
 const DrumsRoute = DrumsRouteImport.update({
   id: '/drums',
   path: '/drums',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GroovesRoute = GroovesRouteImport.update({
+  id: '/grooves',
+  path: '/grooves',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuitarRoute = GuitarRouteImport.update({
@@ -205,6 +211,7 @@ export interface FileRoutesByFullPath {
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
   '/drums': typeof DrumsRoute
+  '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
   '/login': typeof LoginRoute
@@ -238,6 +245,7 @@ export interface FileRoutesByTo {
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
   '/drums': typeof DrumsRoute
+  '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
   '/login': typeof LoginRoute
@@ -272,6 +280,7 @@ export interface FileRoutesById {
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
   '/drums': typeof DrumsRoute
+  '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
   '/login': typeof LoginRoute
@@ -307,6 +316,7 @@ export interface FileRouteTypes {
     | '/agent-login'
     | '/chords'
     | '/drums'
+    | '/grooves'
     | '/guitar'
     | '/jam'
     | '/login'
@@ -340,6 +350,7 @@ export interface FileRouteTypes {
     | '/agent-login'
     | '/chords'
     | '/drums'
+    | '/grooves'
     | '/guitar'
     | '/jam'
     | '/login'
@@ -373,6 +384,7 @@ export interface FileRouteTypes {
     | '/agent-login'
     | '/chords'
     | '/drums'
+    | '/grooves'
     | '/guitar'
     | '/jam'
     | '/login'
@@ -407,6 +419,7 @@ export interface RootRouteChildren {
   AgentLoginRoute: typeof AgentLoginRoute
   ChordsRoute: typeof ChordsRoute
   DrumsRoute: typeof DrumsRoute
+  GroovesRoute: typeof GroovesRoute
   GuitarRoute: typeof GuitarRoute
   JamRoute: typeof JamRoute
   LoginRoute: typeof LoginRoute
@@ -464,6 +477,13 @@ declare module '@tanstack/react-router' {
       path: '/drums'
       fullPath: '/drums'
       preLoaderRoute: typeof DrumsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/grooves': {
+      id: '/grooves'
+      path: '/grooves'
+      fullPath: '/grooves'
+      preLoaderRoute: typeof GroovesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guitar': {
@@ -663,6 +683,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgentLoginRoute: AgentLoginRoute,
   ChordsRoute: ChordsRoute,
   DrumsRoute: DrumsRoute,
+  GroovesRoute: GroovesRoute,
   GuitarRoute: GuitarRoute,
   JamRoute: JamRoute,
   LoginRoute: LoginRoute,
