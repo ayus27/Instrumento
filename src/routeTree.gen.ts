@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentLoginRouteImport } from './routes/agent-login'
 import { Route as ChordsRouteImport } from './routes/chords'
-import { Route as DrumsRouteImport } from './routes/drums'
 import { Route as GroovesRouteImport } from './routes/grooves'
 import { Route as GuitarRouteImport } from './routes/guitar'
 import { Route as JamRouteImport } from './routes/jam'
@@ -21,16 +20,19 @@ import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PianoRouteImport } from './routes/piano'
 import { Route as RecordingsRouteImport } from './routes/recordings'
 import { Route as SignupRouteImport } from './routes/signup'
-import { Route as SongsRouteImport } from './routes/songs'
 import { Route as UkuleleRouteImport } from './routes/ukulele'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AdminSongsRouteImport } from './routes/admin.songs'
 import { Route as ApiPreferencesRouteImport } from './routes/api/preferences'
+import { Route as DrumsIndexRouteImport } from './routes/drums.index'
+import { Route as DrumsTunerRouteImport } from './routes/drums.tuner'
 import { Route as PracticeIndexRouteImport } from './routes/practice.index'
 import { Route as PracticeChallengesRouteImport } from './routes/practice.challenges'
 import { Route as PracticeEarRouteImport } from './routes/practice.ear'
 import { Route as PracticeProgressRouteImport } from './routes/practice.progress'
+import { Route as SongsIndexRouteImport } from './routes/songs.index'
+import { Route as SongsSongIdRouteImport } from './routes/songs.$songId'
 import { Route as TunersGuitarRouteImport } from './routes/tuners.guitar'
 import { Route as TunersUkuleleRouteImport } from './routes/tuners.ukulele'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -55,11 +57,6 @@ const AgentLoginRoute = AgentLoginRouteImport.update({
 const ChordsRoute = ChordsRouteImport.update({
   id: '/chords',
   path: '/chords',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DrumsRoute = DrumsRouteImport.update({
-  id: '/drums',
-  path: '/drums',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GroovesRoute = GroovesRouteImport.update({
@@ -102,11 +99,6 @@ const SignupRoute = SignupRouteImport.update({
   path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SongsRoute = SongsRouteImport.update({
-  id: '/songs',
-  path: '/songs',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const UkuleleRoute = UkuleleRouteImport.update({
   id: '/ukulele',
   path: '/ukulele',
@@ -134,6 +126,16 @@ const ApiPreferencesRoute = ApiPreferencesRouteImport.update({
   path: '/api/preferences',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DrumsIndexRoute = DrumsIndexRouteImport.update({
+  id: '/drums/',
+  path: '/drums/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DrumsTunerRoute = DrumsTunerRouteImport.update({
+  id: '/drums/tuner',
+  path: '/drums/tuner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PracticeIndexRoute = PracticeIndexRouteImport.update({
   id: '/practice/',
   path: '/practice/',
@@ -152,6 +154,16 @@ const PracticeEarRoute = PracticeEarRouteImport.update({
 const PracticeProgressRoute = PracticeProgressRouteImport.update({
   id: '/practice/progress',
   path: '/practice/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SongsIndexRoute = SongsIndexRouteImport.update({
+  id: '/songs/',
+  path: '/songs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SongsSongIdRoute = SongsSongIdRouteImport.update({
+  id: '/songs/$songId',
+  path: '/songs/$songId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TunersGuitarRoute = TunersGuitarRouteImport.update({
@@ -210,7 +222,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
-  '/drums': typeof DrumsRoute
   '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
@@ -219,18 +230,21 @@ export interface FileRoutesByFullPath {
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
-  '/songs': typeof SongsRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
+  '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
   '/practice/ear': typeof PracticeEarRoute
   '/practice/progress': typeof PracticeProgressRoute
+  '/songs/$songId': typeof SongsSongIdRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/drums/': typeof DrumsIndexRoute
   '/practice/': typeof PracticeIndexRoute
+  '/songs/': typeof SongsIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -244,7 +258,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
-  '/drums': typeof DrumsRoute
   '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
@@ -253,18 +266,21 @@ export interface FileRoutesByTo {
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
-  '/songs': typeof SongsRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
+  '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
   '/practice/ear': typeof PracticeEarRoute
   '/practice/progress': typeof PracticeProgressRoute
+  '/songs/$songId': typeof SongsSongIdRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/drums': typeof DrumsIndexRoute
   '/practice': typeof PracticeIndexRoute
+  '/songs': typeof SongsIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -279,7 +295,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
-  '/drums': typeof DrumsRoute
   '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
@@ -288,18 +303,21 @@ export interface FileRoutesById {
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
-  '/songs': typeof SongsRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
+  '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
   '/practice/ear': typeof PracticeEarRoute
   '/practice/progress': typeof PracticeProgressRoute
+  '/songs/$songId': typeof SongsSongIdRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/drums/': typeof DrumsIndexRoute
   '/practice/': typeof PracticeIndexRoute
+  '/songs/': typeof SongsIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -315,7 +333,6 @@ export interface FileRouteTypes {
     | '/'
     | '/agent-login'
     | '/chords'
-    | '/drums'
     | '/grooves'
     | '/guitar'
     | '/jam'
@@ -324,18 +341,21 @@ export interface FileRouteTypes {
     | '/piano'
     | '/recordings'
     | '/signup'
-    | '/songs'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
+    | '/drums/tuner'
     | '/practice/challenges'
     | '/practice/ear'
     | '/practice/progress'
+    | '/songs/$songId'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/drums/'
     | '/practice/'
+    | '/songs/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/auth/login'
@@ -349,7 +369,6 @@ export interface FileRouteTypes {
     | '/'
     | '/agent-login'
     | '/chords'
-    | '/drums'
     | '/grooves'
     | '/guitar'
     | '/jam'
@@ -358,18 +377,21 @@ export interface FileRouteTypes {
     | '/piano'
     | '/recordings'
     | '/signup'
-    | '/songs'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
+    | '/drums/tuner'
     | '/practice/challenges'
     | '/practice/ear'
     | '/practice/progress'
+    | '/songs/$songId'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/drums'
     | '/practice'
+    | '/songs'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/auth/login'
@@ -383,7 +405,6 @@ export interface FileRouteTypes {
     | '/'
     | '/agent-login'
     | '/chords'
-    | '/drums'
     | '/grooves'
     | '/guitar'
     | '/jam'
@@ -392,18 +413,21 @@ export interface FileRouteTypes {
     | '/piano'
     | '/recordings'
     | '/signup'
-    | '/songs'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
+    | '/drums/tuner'
     | '/practice/challenges'
     | '/practice/ear'
     | '/practice/progress'
+    | '/songs/$songId'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/drums/'
     | '/practice/'
+    | '/songs/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/auth/login'
@@ -418,7 +442,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentLoginRoute: typeof AgentLoginRoute
   ChordsRoute: typeof ChordsRoute
-  DrumsRoute: typeof DrumsRoute
   GroovesRoute: typeof GroovesRoute
   GuitarRoute: typeof GuitarRoute
   JamRoute: typeof JamRoute
@@ -427,18 +450,21 @@ export interface RootRouteChildren {
   PianoRoute: typeof PianoRoute
   RecordingsRoute: typeof RecordingsRoute
   SignupRoute: typeof SignupRoute
-  SongsRoute: typeof SongsRoute
   UkuleleRoute: typeof UkuleleRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminSongsRoute: typeof AdminSongsRoute
   ApiPreferencesRoute: typeof ApiPreferencesRoute
+  DrumsTunerRoute: typeof DrumsTunerRoute
   PracticeChallengesRoute: typeof PracticeChallengesRoute
   PracticeEarRoute: typeof PracticeEarRoute
   PracticeProgressRoute: typeof PracticeProgressRoute
+  SongsSongIdRoute: typeof SongsSongIdRoute
   TunersGuitarRoute: typeof TunersGuitarRoute
   TunersUkuleleRoute: typeof TunersUkuleleRoute
+  DrumsIndexRoute: typeof DrumsIndexRoute
   PracticeIndexRoute: typeof PracticeIndexRoute
+  SongsIndexRoute: typeof SongsIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
@@ -470,13 +496,6 @@ declare module '@tanstack/react-router' {
       path: '/chords'
       fullPath: '/chords'
       preLoaderRoute: typeof ChordsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/drums': {
-      id: '/drums'
-      path: '/drums'
-      fullPath: '/drums'
-      preLoaderRoute: typeof DrumsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/grooves': {
@@ -535,13 +554,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/songs': {
-      id: '/songs'
-      path: '/songs'
-      fullPath: '/songs'
-      preLoaderRoute: typeof SongsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/ukulele': {
       id: '/ukulele'
       path: '/ukulele'
@@ -577,6 +589,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPreferencesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/drums/': {
+      id: '/drums/'
+      path: '/drums'
+      fullPath: '/drums/'
+      preLoaderRoute: typeof DrumsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/drums/tuner': {
+      id: '/drums/tuner'
+      path: '/drums/tuner'
+      fullPath: '/drums/tuner'
+      preLoaderRoute: typeof DrumsTunerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/practice/': {
       id: '/practice/'
       path: '/practice'
@@ -603,6 +629,20 @@ declare module '@tanstack/react-router' {
       path: '/practice/progress'
       fullPath: '/practice/progress'
       preLoaderRoute: typeof PracticeProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/songs/': {
+      id: '/songs/'
+      path: '/songs'
+      fullPath: '/songs/'
+      preLoaderRoute: typeof SongsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/songs/$songId': {
+      id: '/songs/$songId'
+      path: '/songs/$songId'
+      fullPath: '/songs/$songId'
+      preLoaderRoute: typeof SongsSongIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tuners/guitar': {
@@ -682,7 +722,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentLoginRoute: AgentLoginRoute,
   ChordsRoute: ChordsRoute,
-  DrumsRoute: DrumsRoute,
   GroovesRoute: GroovesRoute,
   GuitarRoute: GuitarRoute,
   JamRoute: JamRoute,
@@ -691,19 +730,22 @@ const rootRouteChildren: RootRouteChildren = {
   PianoRoute: PianoRoute,
   RecordingsRoute: RecordingsRoute,
   SignupRoute: SignupRoute,
-  SongsRoute: SongsRoute,
   UkuleleRoute: UkuleleRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminSongsRoute: AdminSongsRoute,
   ApiPreferencesRoute: ApiPreferencesRoute,
+  DrumsTunerRoute: DrumsTunerRoute,
   PracticeChallengesRoute: PracticeChallengesRoute,
   PracticeEarRoute: PracticeEarRoute,
   PracticeProgressRoute: PracticeProgressRoute,
+  SongsSongIdRoute: SongsSongIdRoute,
   TunersGuitarRoute: TunersGuitarRoute,
   TunersUkuleleRoute: TunersUkuleleRoute,
+  DrumsIndexRoute: DrumsIndexRoute,
   PracticeIndexRoute: PracticeIndexRoute,
+  SongsIndexRoute: SongsIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiAuthLoginRoute: ApiAuthLoginRoute,

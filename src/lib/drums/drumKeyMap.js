@@ -49,8 +49,10 @@ export function keyLabel(key) {
 
 export function isValidKeyMap(value) {
   if (!value || typeof value !== "object") return false;
+  // An empty value is valid: conflict replacement can intentionally unassign
+  // the previous piece until the user gives it another key.
   return DRUM_PIECES.every(
-    (piece) => typeof value[piece.id] === "string" && value[piece.id].length > 0,
+    (piece) => typeof value[piece.id] === "string" && value[piece.id].length <= 32,
   );
 }
 
