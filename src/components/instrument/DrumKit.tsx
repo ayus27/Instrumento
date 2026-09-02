@@ -13,13 +13,16 @@ export const DRUM_PADS: Pad[] = [
 type Props = {
   hitPads: string[];
   onHit: (pad: string) => void;
+  /** Optional custom key labels, keyed by pad id. */
+  keyLabels?: Record<string, string>;
 };
 
-export function DrumKit({ hitPads, onHit }: Props) {
+export function DrumKit({ hitPads, onHit, keyLabels }: Props) {
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {DRUM_PADS.map((pad) => {
         const on = hitPads.includes(pad.id);
+        const label = keyLabels?.[pad.id] ?? pad.key.toUpperCase();
         return (
           <button
             key={pad.id}
