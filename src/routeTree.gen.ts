@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgentLoginRouteImport } from './routes/agent-login'
 import { Route as ChordsRouteImport } from './routes/chords'
-import { Route as DrumsRouteImport } from './routes/drums'
 import { Route as GroovesRouteImport } from './routes/grooves'
 import { Route as GuitarRouteImport } from './routes/guitar'
 import { Route as JamRouteImport } from './routes/jam'
@@ -57,11 +56,6 @@ const AgentLoginRoute = AgentLoginRouteImport.update({
 const ChordsRoute = ChordsRouteImport.update({
   id: '/chords',
   path: '/chords',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DrumsRoute = DrumsRouteImport.update({
-  id: '/drums',
-  path: '/drums',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GroovesRoute = GroovesRouteImport.update({
@@ -132,9 +126,9 @@ const ApiPreferencesRoute = ApiPreferencesRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const DrumsTunerRoute = DrumsTunerRouteImport.update({
-  id: '/tuner',
-  path: '/tuner',
-  getParentRoute: () => DrumsRoute,
+  id: '/drums/tuner',
+  path: '/drums/tuner',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PracticeIndexRoute = PracticeIndexRouteImport.update({
   id: '/practice/',
@@ -222,7 +216,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
-  '/drums': typeof DrumsRouteWithChildren
   '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
@@ -258,7 +251,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
-  '/drums': typeof DrumsRouteWithChildren
   '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
@@ -295,7 +287,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
-  '/drums': typeof DrumsRouteWithChildren
   '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
@@ -333,7 +324,6 @@ export interface FileRouteTypes {
     | '/'
     | '/agent-login'
     | '/chords'
-    | '/drums'
     | '/grooves'
     | '/guitar'
     | '/jam'
@@ -369,7 +359,6 @@ export interface FileRouteTypes {
     | '/'
     | '/agent-login'
     | '/chords'
-    | '/drums'
     | '/grooves'
     | '/guitar'
     | '/jam'
@@ -405,7 +394,6 @@ export interface FileRouteTypes {
     | '/'
     | '/agent-login'
     | '/chords'
-    | '/drums'
     | '/grooves'
     | '/guitar'
     | '/jam'
@@ -442,7 +430,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentLoginRoute: typeof AgentLoginRoute
   ChordsRoute: typeof ChordsRoute
-  DrumsRoute: typeof DrumsRouteWithChildren
   GroovesRoute: typeof GroovesRoute
   GuitarRoute: typeof GuitarRoute
   JamRoute: typeof JamRoute
@@ -456,6 +443,7 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminSongsRoute: typeof AdminSongsRoute
   ApiPreferencesRoute: typeof ApiPreferencesRoute
+  DrumsTunerRoute: typeof DrumsTunerRoute
   PracticeChallengesRoute: typeof PracticeChallengesRoute
   PracticeEarRoute: typeof PracticeEarRoute
   PracticeProgressRoute: typeof PracticeProgressRoute
@@ -495,13 +483,6 @@ declare module '@tanstack/react-router' {
       path: '/chords'
       fullPath: '/chords'
       preLoaderRoute: typeof ChordsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/drums': {
-      id: '/drums'
-      path: '/drums'
-      fullPath: '/drums'
-      preLoaderRoute: typeof DrumsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/grooves': {
@@ -597,10 +578,10 @@ declare module '@tanstack/react-router' {
     }
     '/drums/tuner': {
       id: '/drums/tuner'
-      path: '/tuner'
+      path: '/drums/tuner'
       fullPath: '/drums/tuner'
       preLoaderRoute: typeof DrumsTunerRouteImport
-      parentRoute: typeof DrumsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/practice/': {
       id: '/practice/'
@@ -717,21 +698,10 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface DrumsRouteChildren {
-  DrumsTunerRoute: typeof DrumsTunerRoute
-}
-
-const DrumsRouteChildren: DrumsRouteChildren = {
-  DrumsTunerRoute: DrumsTunerRoute,
-}
-
-const DrumsRouteWithChildren = DrumsRoute._addFileChildren(DrumsRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentLoginRoute: AgentLoginRoute,
   ChordsRoute: ChordsRoute,
-  DrumsRoute: DrumsRouteWithChildren,
   GroovesRoute: GroovesRoute,
   GuitarRoute: GuitarRoute,
   JamRoute: JamRoute,
@@ -746,6 +716,7 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminSongsRoute: AdminSongsRoute,
   ApiPreferencesRoute: ApiPreferencesRoute,
+  DrumsTunerRoute: DrumsTunerRoute,
   PracticeChallengesRoute: PracticeChallengesRoute,
   PracticeEarRoute: PracticeEarRoute,
   PracticeProgressRoute: PracticeProgressRoute,
