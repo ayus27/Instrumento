@@ -26,6 +26,7 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AdminSongsRouteImport } from './routes/admin.songs'
 import { Route as ApiPreferencesRouteImport } from './routes/api/preferences'
+import { Route as DrumsTunerRouteImport } from './routes/drums.tuner'
 import { Route as PracticeIndexRouteImport } from './routes/practice.index'
 import { Route as PracticeChallengesRouteImport } from './routes/practice.challenges'
 import { Route as PracticeEarRouteImport } from './routes/practice.ear'
@@ -130,6 +131,11 @@ const ApiPreferencesRoute = ApiPreferencesRouteImport.update({
   path: '/api/preferences',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DrumsTunerRoute = DrumsTunerRouteImport.update({
+  id: '/tuner',
+  path: '/tuner',
+  getParentRoute: () => DrumsRoute,
+} as any)
 const PracticeIndexRoute = PracticeIndexRouteImport.update({
   id: '/practice/',
   path: '/practice/',
@@ -216,7 +222,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
-  '/drums': typeof DrumsRoute
+  '/drums': typeof DrumsRouteWithChildren
   '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
@@ -230,6 +236,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
+  '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
   '/practice/ear': typeof PracticeEarRoute
   '/practice/progress': typeof PracticeProgressRoute
@@ -251,7 +258,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
-  '/drums': typeof DrumsRoute
+  '/drums': typeof DrumsRouteWithChildren
   '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
@@ -265,6 +272,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
+  '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
   '/practice/ear': typeof PracticeEarRoute
   '/practice/progress': typeof PracticeProgressRoute
@@ -287,7 +295,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agent-login': typeof AgentLoginRoute
   '/chords': typeof ChordsRoute
-  '/drums': typeof DrumsRoute
+  '/drums': typeof DrumsRouteWithChildren
   '/grooves': typeof GroovesRoute
   '/guitar': typeof GuitarRoute
   '/jam': typeof JamRoute
@@ -301,6 +309,7 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
+  '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
   '/practice/ear': typeof PracticeEarRoute
   '/practice/progress': typeof PracticeProgressRoute
@@ -338,6 +347,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
+    | '/drums/tuner'
     | '/practice/challenges'
     | '/practice/ear'
     | '/practice/progress'
@@ -373,6 +383,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
+    | '/drums/tuner'
     | '/practice/challenges'
     | '/practice/ear'
     | '/practice/progress'
@@ -408,6 +419,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
+    | '/drums/tuner'
     | '/practice/challenges'
     | '/practice/ear'
     | '/practice/progress'
@@ -430,7 +442,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgentLoginRoute: typeof AgentLoginRoute
   ChordsRoute: typeof ChordsRoute
-  DrumsRoute: typeof DrumsRoute
+  DrumsRoute: typeof DrumsRouteWithChildren
   GroovesRoute: typeof GroovesRoute
   GuitarRoute: typeof GuitarRoute
   JamRoute: typeof JamRoute
@@ -583,6 +595,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPreferencesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/drums/tuner': {
+      id: '/drums/tuner'
+      path: '/tuner'
+      fullPath: '/drums/tuner'
+      preLoaderRoute: typeof DrumsTunerRouteImport
+      parentRoute: typeof DrumsRoute
+    }
     '/practice/': {
       id: '/practice/'
       path: '/practice'
@@ -698,11 +717,21 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface DrumsRouteChildren {
+  DrumsTunerRoute: typeof DrumsTunerRoute
+}
+
+const DrumsRouteChildren: DrumsRouteChildren = {
+  DrumsTunerRoute: DrumsTunerRoute,
+}
+
+const DrumsRouteWithChildren = DrumsRoute._addFileChildren(DrumsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgentLoginRoute: AgentLoginRoute,
   ChordsRoute: ChordsRoute,
-  DrumsRoute: DrumsRoute,
+  DrumsRoute: DrumsRouteWithChildren,
   GroovesRoute: GroovesRoute,
   GuitarRoute: GuitarRoute,
   JamRoute: JamRoute,

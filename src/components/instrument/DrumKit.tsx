@@ -39,7 +39,7 @@ export function DrumKit({ hitPads, onHit, keyLabels }: Props) {
             }
           >
             <span className="label-mono" style={on ? { color: "inherit" } : undefined}>
-              {pad.key.toUpperCase()}
+              {label}
             </span>
             <span className="font-display text-xl">{pad.label}</span>
           </button>
