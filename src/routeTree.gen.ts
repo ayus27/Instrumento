@@ -21,7 +21,6 @@ import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PianoRouteImport } from './routes/piano'
 import { Route as RecordingsRouteImport } from './routes/recordings'
 import { Route as SignupRouteImport } from './routes/signup'
-import { Route as SongsRouteImport } from './routes/songs'
 import { Route as UkuleleRouteImport } from './routes/ukulele'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -100,11 +99,6 @@ const RecordingsRoute = RecordingsRouteImport.update({
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SongsRoute = SongsRouteImport.update({
-  id: '/songs',
-  path: '/songs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UkuleleRoute = UkuleleRouteImport.update({
@@ -219,7 +213,6 @@ export interface FileRoutesByFullPath {
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
-  '/songs': typeof SongsRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -253,7 +246,6 @@ export interface FileRoutesByTo {
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
-  '/songs': typeof SongsRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -288,7 +280,6 @@ export interface FileRoutesById {
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
-  '/songs': typeof SongsRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -324,7 +315,6 @@ export interface FileRouteTypes {
     | '/piano'
     | '/recordings'
     | '/signup'
-    | '/songs'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -358,7 +348,6 @@ export interface FileRouteTypes {
     | '/piano'
     | '/recordings'
     | '/signup'
-    | '/songs'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -392,7 +381,6 @@ export interface FileRouteTypes {
     | '/piano'
     | '/recordings'
     | '/signup'
-    | '/songs'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -427,7 +415,6 @@ export interface RootRouteChildren {
   PianoRoute: typeof PianoRoute
   RecordingsRoute: typeof RecordingsRoute
   SignupRoute: typeof SignupRoute
-  SongsRoute: typeof SongsRoute
   UkuleleRoute: typeof UkuleleRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -533,13 +520,6 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/songs': {
-      id: '/songs'
-      path: '/songs'
-      fullPath: '/songs'
-      preLoaderRoute: typeof SongsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ukulele': {
@@ -691,7 +671,6 @@ const rootRouteChildren: RootRouteChildren = {
   PianoRoute: PianoRoute,
   RecordingsRoute: RecordingsRoute,
   SignupRoute: SignupRoute,
-  SongsRoute: SongsRoute,
   UkuleleRoute: UkuleleRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
