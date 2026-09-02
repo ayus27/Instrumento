@@ -128,6 +128,7 @@ const NAV = [
   { to: "/guitar", label: "Guitar" },
   { to: "/drums", label: "Drums" },
   { to: "/ukulele", label: "Ukulele" },
+  { to: "/songs", label: "Songs" },
   { to: "/practice", label: "Practice" },
 
   { to: "/tuners/guitar", label: "Gtr Tuner" },
