@@ -25,6 +25,7 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AdminSongsRouteImport } from './routes/admin.songs'
 import { Route as ApiPreferencesRouteImport } from './routes/api/preferences'
+import { Route as DrumsIndexRouteImport } from './routes/drums.index'
 import { Route as DrumsTunerRouteImport } from './routes/drums.tuner'
 import { Route as PracticeIndexRouteImport } from './routes/practice.index'
 import { Route as PracticeChallengesRouteImport } from './routes/practice.challenges'
@@ -123,6 +124,11 @@ const AdminSongsRoute = AdminSongsRouteImport.update({
 const ApiPreferencesRoute = ApiPreferencesRouteImport.update({
   id: '/api/preferences',
   path: '/api/preferences',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DrumsIndexRoute = DrumsIndexRouteImport.update({
+  id: '/drums/',
+  path: '/drums/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DrumsTunerRoute = DrumsTunerRouteImport.update({
@@ -236,6 +242,7 @@ export interface FileRoutesByFullPath {
   '/songs/$songId': typeof SongsSongIdRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/drums/': typeof DrumsIndexRoute
   '/practice/': typeof PracticeIndexRoute
   '/songs/': typeof SongsIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -271,6 +278,7 @@ export interface FileRoutesByTo {
   '/songs/$songId': typeof SongsSongIdRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/drums': typeof DrumsIndexRoute
   '/practice': typeof PracticeIndexRoute
   '/songs': typeof SongsIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -307,6 +315,7 @@ export interface FileRoutesById {
   '/songs/$songId': typeof SongsSongIdRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/drums/': typeof DrumsIndexRoute
   '/practice/': typeof PracticeIndexRoute
   '/songs/': typeof SongsIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -344,6 +353,7 @@ export interface FileRouteTypes {
     | '/songs/$songId'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/drums/'
     | '/practice/'
     | '/songs/'
     | '/.lovable/oauth/consent'
@@ -379,6 +389,7 @@ export interface FileRouteTypes {
     | '/songs/$songId'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/drums'
     | '/practice'
     | '/songs'
     | '/.lovable/oauth/consent'
@@ -414,6 +425,7 @@ export interface FileRouteTypes {
     | '/songs/$songId'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/drums/'
     | '/practice/'
     | '/songs/'
     | '/.lovable/oauth/consent'
@@ -450,6 +462,7 @@ export interface RootRouteChildren {
   SongsSongIdRoute: typeof SongsSongIdRoute
   TunersGuitarRoute: typeof TunersGuitarRoute
   TunersUkuleleRoute: typeof TunersUkuleleRoute
+  DrumsIndexRoute: typeof DrumsIndexRoute
   PracticeIndexRoute: typeof PracticeIndexRoute
   SongsIndexRoute: typeof SongsIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
@@ -574,6 +587,13 @@ declare module '@tanstack/react-router' {
       path: '/api/preferences'
       fullPath: '/api/preferences'
       preLoaderRoute: typeof ApiPreferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/drums/': {
+      id: '/drums/'
+      path: '/drums'
+      fullPath: '/drums/'
+      preLoaderRoute: typeof DrumsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/drums/tuner': {
@@ -723,6 +743,7 @@ const rootRouteChildren: RootRouteChildren = {
   SongsSongIdRoute: SongsSongIdRoute,
   TunersGuitarRoute: TunersGuitarRoute,
   TunersUkuleleRoute: TunersUkuleleRoute,
+  DrumsIndexRoute: DrumsIndexRoute,
   PracticeIndexRoute: PracticeIndexRoute,
   SongsIndexRoute: SongsIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
