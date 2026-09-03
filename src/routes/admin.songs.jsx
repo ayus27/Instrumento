@@ -19,8 +19,8 @@ function AdminSongsPage() {
     title: "",
     artist: "",
     album: "",
-    key: "C",
-    bpm: 100,
+    originalKey: "C",
+    tempo: 100,
     genre: "Pop",
   });
 
@@ -33,7 +33,7 @@ function AdminSongsPage() {
     };
     setSongsList((prev) => [newSong, ...prev]);
     setIsEditing(false);
-    setFormData({ title: "", artist: "", album: "", key: "C", bpm: 100, genre: "Pop" });
+    setFormData({ title: "", artist: "", album: "", originalKey: "C", tempo: 100, genre: "Pop" });
   };
 
   return (
@@ -85,8 +85,8 @@ function AdminSongsPage() {
               <label className="label-mono block mb-1">Key</label>
               <input
                 type="text"
-                value={formData.key}
-                onChange={(e) => setFormData({ ...formData, key: e.target.value })}
+                value={formData.originalKey}
+                onChange={(e) => setFormData({ ...formData, originalKey: e.target.value })}
                 className="w-full panel p-2 bg-background font-mono text-xs text-foreground"
               />
             </div>
@@ -94,8 +94,8 @@ function AdminSongsPage() {
               <label className="label-mono block mb-1">BPM</label>
               <input
                 type="number"
-                value={formData.bpm}
-                onChange={(e) => setFormData({ ...formData, bpm: Number(e.target.value) })}
+                value={formData.tempo}
+                onChange={(e) => setFormData({ ...formData, tempo: Number(e.target.value) })}
                 className="w-full panel p-2 bg-background font-mono text-xs text-foreground"
               />
             </div>
@@ -133,8 +133,8 @@ function AdminSongsPage() {
               <tr key={s.id} className="hover:bg-accent">
                 <td className="py-3 font-bold text-foreground">{s.title}</td>
                 <td className="py-3 text-muted-foreground">{s.artist}</td>
-                <td className="py-3 text-signal">{s.key}</td>
-                <td className="py-3">{s.bpm}</td>
+                <td className="py-3 text-signal">{s.originalKey}</td>
+                <td className="py-3">{s.tempo}</td>
                 <td className="py-3">{s.genre}</td>
                 <td className="py-3 text-right space-x-2">
                   <button type="button" className={controlButtonClass}>Edit</button>
