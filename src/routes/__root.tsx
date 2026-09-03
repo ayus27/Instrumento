@@ -11,8 +11,8 @@ import { useCallback, useEffect, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { AppearanceProvider, useAppearance } from "@/lib/appearance";
 import { AuthProvider } from "@/lib/auth-client";
-import { AppearanceMenu } from "@/components/AppearanceMenu";
-import { AccountMenu } from "@/components/AccountMenu";
+import { SiteHeader } from "@/components/SiteHeader";
+
 
 
 import appCss from "../styles.css?url";
