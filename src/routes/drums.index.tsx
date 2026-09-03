@@ -106,7 +106,7 @@ function DrumsPage() {
             getEngine().setVolume(v);
           }}
           extra={
-            <Link to="/drums/tuner" className="label-mono hover:text-foreground">
+            <Link to="/tuners/drums" className="label-mono hover:text-foreground">
               Drum tuner →
             </Link>
           }

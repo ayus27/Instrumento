@@ -17,20 +17,21 @@ export function DrumTuner() {
   const fresh = reading && performance.now() - reading.at < 1500;
 
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-5 px-5 py-8">
-      <header className="hairline flex flex-wrap items-end justify-between gap-4 pb-4">
-        <div>
-          <h1 className="font-display text-4xl uppercase tracking-tight">Drum Tuner</h1>
+    <div className="mx-auto w-full max-w-3xl space-y-5 px-4 py-6 sm:px-5 sm:py-8">
+      <header className="hairline grid grid-cols-1 items-end gap-3 pb-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-4">
+        <div className="min-w-0">
+          <h1 className="font-display text-3xl uppercase tracking-tight sm:text-4xl">Drum Tuner</h1>
           <p className="label-mono mt-1">Microphone pitch analysis for drum heads</p>
         </div>
         <button
           type="button"
-          className={controlButtonClass}
+          className={`${controlButtonClass} w-full sm:w-auto`}
           onClick={() => (listening ? stop() : void start())}
         >
           {listening ? "Stop microphone" : "Enable microphone"}
         </button>
       </header>
+
 
       {error && (
         <p
@@ -93,23 +94,26 @@ export function DrumTuner() {
         {listening && !fresh ? (
           <p className="font-mono text-sm text-muted-foreground">Waiting for a drum hit…</p>
         ) : (
-          <div className="flex flex-wrap items-end gap-6">
-            <div>
+          <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:items-end sm:gap-6">
+            <div className="min-w-0">
               <p className="label-mono">Detected</p>
-              <p className="font-display text-5xl tracking-tight">{fresh ? reading.note : "—"}</p>
+              <p className="font-display text-4xl tracking-tight sm:text-5xl">
+                {fresh ? reading.note : "—"}
+              </p>
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="label-mono">Frequency</p>
-              <p className="font-mono text-2xl text-signal">
+              <p className="font-mono text-xl text-signal sm:text-2xl">
                 {fresh ? `${reading.frequency.toFixed(1)} Hz` : "—"}
               </p>
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="label-mono">Target</p>
-              <p className="font-mono text-2xl">{target ? `${target} Hz` : "—"}</p>
+              <p className="font-mono text-xl sm:text-2xl">{target ? `${target} Hz` : "—"}</p>
             </div>
           </div>
         )}
+
 
         <PitchIndicator cents={fresh ? reading.cents : 0} active={Boolean(fresh)} />
       </div>
