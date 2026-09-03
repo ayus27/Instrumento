@@ -222,3 +222,11 @@
   --signal: oklch(0.66 0.075 15);
   --signal-dim: oklch(0.44 0.05 15);
 }
+
+/* Brand mark: artwork is black-on-transparent, so invert on the dark theme. */
+.logo-mark {
+  filter: invert(1);
+}
+:root[data-theme="light"] .logo-mark {
+  filter: none;
+}
