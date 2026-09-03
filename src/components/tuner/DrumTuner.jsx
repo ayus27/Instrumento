@@ -94,23 +94,26 @@ export function DrumTuner() {
         {listening && !fresh ? (
           <p className="font-mono text-sm text-muted-foreground">Waiting for a drum hit…</p>
         ) : (
-          <div className="flex flex-wrap items-end gap-6">
-            <div>
+          <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:items-end sm:gap-6">
+            <div className="min-w-0">
               <p className="label-mono">Detected</p>
-              <p className="font-display text-5xl tracking-tight">{fresh ? reading.note : "—"}</p>
+              <p className="font-display text-4xl tracking-tight sm:text-5xl">
+                {fresh ? reading.note : "—"}
+              </p>
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="label-mono">Frequency</p>
-              <p className="font-mono text-2xl text-signal">
+              <p className="font-mono text-xl text-signal sm:text-2xl">
                 {fresh ? `${reading.frequency.toFixed(1)} Hz` : "—"}
               </p>
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="label-mono">Target</p>
-              <p className="font-mono text-2xl">{target ? `${target} Hz` : "—"}</p>
+              <p className="font-mono text-xl sm:text-2xl">{target ? `${target} Hz` : "—"}</p>
             </div>
           </div>
         )}
+
 
         <PitchIndicator cents={fresh ? reading.cents : 0} active={Boolean(fresh)} />
       </div>
