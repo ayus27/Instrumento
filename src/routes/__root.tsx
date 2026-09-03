@@ -123,19 +123,6 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
-const NAV = [
-  { to: "/piano", label: "Piano" },
-  { to: "/guitar", label: "Guitar" },
-  { to: "/drums", label: "Drums" },
-  { to: "/ukulele", label: "Ukulele" },
-  { to: "/songs", label: "Songs" },
-  { to: "/practice", label: "Practice" },
-
-  { to: "/tuners/guitar", label: "Gtr Tuner" },
-  { to: "/tuners/ukulele", label: "Uke Tuner" },
-  { to: "/recordings", label: "Recordings" },
-] as const;
-
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -144,32 +131,7 @@ function RootComponent() {
       <AppearanceProvider>
         <AuthBridge>
           <div className="flex min-h-screen flex-col">
-            <header
-              className="hairline sticky top-0 z-30 backdrop-blur-sm"
-              style={{ backgroundColor: "color-mix(in oklch, var(--background) 88%, transparent)" }}
-            >
-              <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-5 py-3">
-                <Link to="/" className="font-display text-lg uppercase tracking-[0.18em]">
-                  Instru<span style={{ color: "var(--signal)" }}>mento</span>
-                </Link>
-                <nav className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                  {NAV.map((item) => (
-                    <Link
-                      key={item.to}
-                      to={item.to}
-                      className="label-mono transition-colors hover:text-foreground"
-                      activeProps={{ style: { color: "var(--signal)" } }}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </nav>
-                <div className="ml-auto flex items-center gap-3">
-                  <AppearanceMenu />
-                  <AccountMenu />
-                </div>
-              </div>
-            </header>
+            <SiteHeader />
             {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
             <main className="flex-1">
               <Outlet />
@@ -181,6 +143,7 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
 
 // Syncs account-stored appearance preferences into the appearance context on sign-in.
 function AuthBridge({ children }: { children: ReactNode }) {
