@@ -131,8 +131,8 @@ export function SiteHeader() {
             aria-expanded={open}
             className="panel grid h-9 w-9 place-items-center lg:hidden"
           >
-            {open ? <Menu className="h-4 w-4" hidden /> : null}
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+
           </button>
         </div>
       </div>
