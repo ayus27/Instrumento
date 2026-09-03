@@ -33,6 +33,7 @@ import { Route as PracticeEarRouteImport } from './routes/practice.ear'
 import { Route as PracticeProgressRouteImport } from './routes/practice.progress'
 import { Route as SongsIndexRouteImport } from './routes/songs.index'
 import { Route as SongsSongIdRouteImport } from './routes/songs.$songId'
+import { Route as TunersDrumsRouteImport } from './routes/tuners.drums'
 import { Route as TunersGuitarRouteImport } from './routes/tuners.guitar'
 import { Route as TunersUkuleleRouteImport } from './routes/tuners.ukulele'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -166,6 +167,11 @@ const SongsSongIdRoute = SongsSongIdRouteImport.update({
   path: '/songs/$songId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TunersDrumsRoute = TunersDrumsRouteImport.update({
+  id: '/tuners/drums',
+  path: '/tuners/drums',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TunersGuitarRoute = TunersGuitarRouteImport.update({
   id: '/tuners/guitar',
   path: '/tuners/guitar',
@@ -240,6 +246,7 @@ export interface FileRoutesByFullPath {
   '/practice/ear': typeof PracticeEarRoute
   '/practice/progress': typeof PracticeProgressRoute
   '/songs/$songId': typeof SongsSongIdRoute
+  '/tuners/drums': typeof TunersDrumsRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
   '/drums/': typeof DrumsIndexRoute
@@ -276,6 +283,7 @@ export interface FileRoutesByTo {
   '/practice/ear': typeof PracticeEarRoute
   '/practice/progress': typeof PracticeProgressRoute
   '/songs/$songId': typeof SongsSongIdRoute
+  '/tuners/drums': typeof TunersDrumsRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
   '/drums': typeof DrumsIndexRoute
@@ -313,6 +321,7 @@ export interface FileRoutesById {
   '/practice/ear': typeof PracticeEarRoute
   '/practice/progress': typeof PracticeProgressRoute
   '/songs/$songId': typeof SongsSongIdRoute
+  '/tuners/drums': typeof TunersDrumsRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
   '/drums/': typeof DrumsIndexRoute
@@ -351,6 +360,7 @@ export interface FileRouteTypes {
     | '/practice/ear'
     | '/practice/progress'
     | '/songs/$songId'
+    | '/tuners/drums'
     | '/tuners/guitar'
     | '/tuners/ukulele'
     | '/drums/'
@@ -387,6 +397,7 @@ export interface FileRouteTypes {
     | '/practice/ear'
     | '/practice/progress'
     | '/songs/$songId'
+    | '/tuners/drums'
     | '/tuners/guitar'
     | '/tuners/ukulele'
     | '/drums'
@@ -423,6 +434,7 @@ export interface FileRouteTypes {
     | '/practice/ear'
     | '/practice/progress'
     | '/songs/$songId'
+    | '/tuners/drums'
     | '/tuners/guitar'
     | '/tuners/ukulele'
     | '/drums/'
@@ -460,6 +472,7 @@ export interface RootRouteChildren {
   PracticeEarRoute: typeof PracticeEarRoute
   PracticeProgressRoute: typeof PracticeProgressRoute
   SongsSongIdRoute: typeof SongsSongIdRoute
+  TunersDrumsRoute: typeof TunersDrumsRoute
   TunersGuitarRoute: typeof TunersGuitarRoute
   TunersUkuleleRoute: typeof TunersUkuleleRoute
   DrumsIndexRoute: typeof DrumsIndexRoute
@@ -645,6 +658,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SongsSongIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tuners/drums': {
+      id: '/tuners/drums'
+      path: '/tuners/drums'
+      fullPath: '/tuners/drums'
+      preLoaderRoute: typeof TunersDrumsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tuners/guitar': {
       id: '/tuners/guitar'
       path: '/tuners/guitar'
@@ -741,6 +761,7 @@ const rootRouteChildren: RootRouteChildren = {
   PracticeEarRoute: PracticeEarRoute,
   PracticeProgressRoute: PracticeProgressRoute,
   SongsSongIdRoute: SongsSongIdRoute,
+  TunersDrumsRoute: TunersDrumsRoute,
   TunersGuitarRoute: TunersGuitarRoute,
   TunersUkuleleRoute: TunersUkuleleRoute,
   DrumsIndexRoute: DrumsIndexRoute,
