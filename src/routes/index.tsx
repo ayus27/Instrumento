@@ -38,7 +38,9 @@ const CREATE_LEARN = [
 const TUNERS = [
   { to: "/tuners/guitar", name: "Guitar Tuner", detail: "Mic Pitch Detector" },
   { to: "/tuners/ukulele", name: "Ukulele Tuner", detail: "Mic Pitch Detector" },
+  { to: "/tuners/drums", name: "Drum Tuner", detail: "Head Pitch & Cents" },
 ] as const;
+
 
 function Index() {
   return (
