@@ -52,7 +52,7 @@
 }
 
 :root {
-  --radius: 4px;
+  --radius: 14px;
 
   --background: oklch(0.17 0.008 60);
   --foreground: oklch(0.94 0.012 85);
@@ -84,6 +84,8 @@
   --flat: oklch(0.72 0.14 250);
   --sharp: oklch(0.66 0.19 25);
   --intune: oklch(0.78 0.17 145);
+
+  --shadow-soft: 0 1px 2px oklch(0 0 0 / 18%), 0 14px 40px -22px oklch(0 0 0 / 55%);
 }
 
 @layer base {
@@ -95,17 +97,20 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    background-image:
-      linear-gradient(oklch(1 0 0 / 2.5%) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(1 0 0 / 2.5%) 1px, transparent 1px);
-    background-size: 44px 44px;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(
+      120% 80% at 50% -10%,
+      color-mix(in oklch, var(--signal) 8%, transparent),
+      transparent 60%
+    );
+    background-attachment: fixed;
   }
 
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
 }
 
@@ -118,13 +123,34 @@
 }
 
 @utility panel {
-  background-color: var(--color-panel);
+  background-color: color-mix(in oklch, var(--color-panel) 85%, transparent);
   border: 1px solid var(--color-panel-edge);
+  border-radius: var(--radius);
+  backdrop-filter: blur(14px);
+}
+
+@utility soft-card {
+  background-color: color-mix(in oklch, var(--color-panel) 85%, transparent);
+  border: 1px solid var(--color-panel-edge);
+  border-radius: calc(var(--radius) + 8px);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(14px);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    background-color: color-mix(in oklch, var(--color-accent) 55%, transparent);
+    box-shadow: 0 2px 4px oklch(0 0 0 / 18%), 0 24px 50px -24px oklch(0 0 0 / 65%);
+  }
 }
 
 @utility hairline {
   border-bottom: 1px solid var(--color-border);
 }
+
 
 @keyframes rec-pulse {
   0%,
