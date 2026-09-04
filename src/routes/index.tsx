@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import logo from "@/assets/instrumento-wordmark.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
