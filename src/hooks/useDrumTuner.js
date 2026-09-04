@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { detectPitch } from "@/lib/audio/pitch";
+import { detectPitch, medianFrequency } from "@/lib/audio/pitch";
 import { centsOff, frequencyToMidiFloat, midiToFrequency, midiToName } from "@/lib/audio/notes";
 
 /**
