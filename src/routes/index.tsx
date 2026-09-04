@@ -44,71 +44,105 @@ const TUNERS = [
 
 function Index() {
   return (
-    <div className="mx-auto w-full max-w-6xl px-5 py-10 space-y-12">
-      <section className="hairline pb-10">
-        <h1 className="font-display text-6xl uppercase leading-[0.92] tracking-[-0.03em] sm:text-8xl">
-          Instru
-          <span style={{ color: "var(--signal)" }}>mento</span>
-        </h1>
-        <p className="label-mono mt-4 text-signal font-bold">
-          PLAY → LEARN → PRACTICE → CREATE
+    <div className="mx-auto w-full max-w-6xl px-5 pb-24 pt-14 sm:pt-20">
+      <section className="flex flex-col items-center text-center">
+        <img
+          src={logo.url}
+          alt="Instrumento"
+          className="logo-mark h-16 w-auto sm:h-24"
+          width={481}
+          height={160}
+        />
+        <h1 className="sr-only">Instrumento</h1>
+        <p className="mt-8 max-w-2xl font-display text-3xl leading-[1.1] tracking-[-0.03em] sm:text-5xl">
+          Play, learn and record{" "}
+          <span style={{ color: "var(--signal)" }}>real instruments</span> right in your browser.
         </p>
+        <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
+          Piano, guitar, drums and ukulele — with lessons, chords, jam tracks, a songbook and
+          precision tuners. No downloads, no setup.
+        </p>
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <Link
+            to="/piano"
+            className="rounded-full bg-primary px-7 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            Start playing
+          </Link>
+          <Link
+            to="/practice"
+            className="rounded-full border border-panel-edge px-7 py-3 text-sm font-medium transition-colors hover:bg-accent"
+          >
+            Take a lesson
+          </Link>
+        </div>
       </section>
 
-      {/* Play Instruments Section */}
-      <section>
-        <h2 className="label-mono">Play Instruments</h2>
-        <div className="mt-4 grid gap-px border border-panel-edge bg-panel-edge sm:grid-cols-2">
+      <section className="mt-24">
+        <h2 className="font-display text-2xl tracking-[-0.03em] sm:text-3xl">Instruments</h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {INSTRUMENTS.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="group flex items-baseline justify-between bg-panel px-5 py-7 transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-signal"
+              className="soft-card flex items-baseline justify-between px-6 py-8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
             >
-              <span className="font-display text-3xl uppercase tracking-tight">{item.name}</span>
-              <span className="label-mono">{item.detail}</span>
+              <span className="font-display text-2xl tracking-[-0.02em] sm:text-3xl">
+                {item.name}
+              </span>
+              <span className="label-mono text-right">{item.detail}</span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Learn, Practice & Create Section */}
-      <section>
-        <h2 className="label-mono">Learn, Practice & Create</h2>
-        <div className="mt-4 grid gap-px border border-panel-edge bg-panel-edge sm:grid-cols-2 md:grid-cols-3">
+      <section className="mt-20">
+        <h2 className="font-display text-2xl tracking-[-0.03em] sm:text-3xl">
+          Learn, practice &amp; create
+        </h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {CREATE_LEARN.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="group flex flex-col justify-between bg-panel px-5 py-6 transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-signal"
+              className="soft-card flex flex-col justify-between px-6 py-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
             >
-              <span className="font-display text-2xl uppercase tracking-tight text-signal">{item.name}</span>
-              <span className="label-mono mt-3">{item.detail}</span>
+              <span
+                className="font-display text-xl tracking-[-0.02em]"
+                style={{ color: "var(--signal)" }}
+              >
+                {item.name}
+              </span>
+              <span className="label-mono mt-4">{item.detail}</span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Tuners Section */}
-      <section>
-        <h2 className="label-mono">Tuners & Utilities</h2>
-        <div className="mt-4 grid gap-px border border-panel-edge bg-panel-edge sm:grid-cols-2">
+      <section className="mt-20">
+        <h2 className="font-display text-2xl tracking-[-0.03em] sm:text-3xl">Tuners</h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
           {TUNERS.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="flex items-baseline justify-between bg-panel px-5 py-7 transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-signal"
+              className="soft-card flex flex-col justify-between px-6 py-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
             >
-              <span className="font-display text-2xl uppercase tracking-tight">{item.name}</span>
-              <span className="label-mono">{item.detail}</span>
+              <span className="font-display text-xl tracking-[-0.02em]">{item.name}</span>
+              <span className="label-mono mt-4">{item.detail}</span>
             </Link>
           ))}
         </div>
       </section>
 
-      <p className="label-mono mt-10">
-        Hi! Your friend Ayus made this. Here are your beats - <Link to="/recordings" className="underline text-signal">Recordings</Link>.
+      <p className="mt-20 text-center text-sm text-muted-foreground">
+        Made by your friend Ayus. Your takes live in{" "}
+        <Link to="/recordings" className="text-signal underline underline-offset-4">
+          Recordings
+        </Link>
+        .
       </p>
     </div>
   );
 }
+
