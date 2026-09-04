@@ -205,10 +205,13 @@
 }
 
 :root[data-theme="light"] body {
-  background-image:
-    linear-gradient(oklch(0 0 0 / 4%) 1px, transparent 1px),
-    linear-gradient(90deg, oklch(0 0 0 / 4%) 1px, transparent 1px);
+  background-image: radial-gradient(
+    120% 80% at 50% -10%,
+    color-mix(in oklch, var(--signal) 12%, transparent),
+    transparent 60%
+  );
 }
+
 
 /* Primary colour choices (buttons, focus rings) */
 :root[data-primary="slate"] {
