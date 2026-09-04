@@ -91,7 +91,7 @@ export function SiteHeader() {
                   onClick={() => setOpenGroup(openGroup === group.label ? null : group.label)}
                   onMouseEnter={() => setOpenGroup(group.label)}
                   aria-expanded={openGroup === group.label}
-                  className="label-mono flex items-center gap-1 px-3 py-2 transition-colors hover:text-foreground"
+                  className="flex items-center gap-1 rounded-full px-3.5 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                   style={groupActive ? { color: "var(--signal)" } : undefined}
                 >
                   {group.label}
@@ -100,14 +100,14 @@ export function SiteHeader() {
                 {openGroup === group.label && (
                   <div
                     onMouseLeave={() => setOpenGroup(null)}
-                    className="panel absolute left-0 top-full z-50 w-52 p-1"
+                    className="panel absolute left-0 top-full z-50 mt-1 w-52 p-1.5 shadow-lg"
                     style={{ backgroundColor: "var(--popover)" }}
                   >
                     {group.items.map((item) => (
                       <Link
                         key={item.to}
                         to={item.to}
-                        className="label-mono block px-3 py-2 transition-colors hover:bg-accent hover:text-foreground"
+                        className="block rounded-lg px-3 py-2 text-[13px] transition-colors hover:bg-accent hover:text-foreground"
                         activeProps={{ style: { color: "var(--signal)" } }}
                       >
                         {item.label}
@@ -115,6 +115,7 @@ export function SiteHeader() {
                     ))}
                   </div>
                 )}
+
               </div>
             );
           })}
