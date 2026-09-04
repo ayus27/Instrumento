@@ -149,13 +149,14 @@ export function SiteHeader() {
                   <Link
                     key={item.to}
                     to={item.to}
-                    className="panel px-3 py-3 font-display text-sm uppercase tracking-wide"
+                    className="panel px-4 py-3 text-sm"
                     activeProps={{ style: { color: "var(--signal)" } }}
                   >
                     {item.label}
                   </Link>
                 ))}
               </div>
+
             </div>
           ))}
         </div>
