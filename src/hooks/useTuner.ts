@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { detectPitch } from "@/lib/audio/pitch";
+import { detectPitch, medianFrequency } from "@/lib/audio/pitch";
 import { centsOff, midiToFrequency, nameToMidi } from "@/lib/audio/notes";
 
 export type TunerReading = {
@@ -7,17 +7,28 @@ export type TunerReading = {
   targetNote: string;
   targetFrequency: number;
   cents: number;
+  at: number;
 };
 
 export type TunerStatus = "idle" | "starting" | "listening" | "denied" | "error";
 
-export function useTuner(strings: string[]) {
+type Options = {
+  /** When set, always compare against this string instead of auto-detecting. */
+  lockedNote?: string | null;
+};
+
+const HISTORY = 6;
+const SIGNAL_TIMEOUT_MS = 900;
+
+export function useTuner(strings: string[], options: Options = {}) {
   const [status, setStatus] = useState<TunerStatus>("idle");
   const [error, setError] = useState<string | null>(null);
   const [reading, setReading] = useState<TunerReading | null>(null);
   const cleanupRef = useRef<null | (() => void)>(null);
   const stringsRef = useRef(strings);
   stringsRef.current = strings;
+  const lockedRef = useRef(options.lockedNote ?? null);
+  lockedRef.current = options.lockedNote ?? null;
 
   const stop = useCallback(() => {
     cleanupRef.current?.();
@@ -37,33 +48,74 @@ export function useTuner(strings: string[]) {
       const ctx = new AudioContext();
       await ctx.resume();
       const source = ctx.createMediaStreamSource(stream);
+
+      // Trim rumble and hiss so autocorrelation locks onto the fundamental.
+      const highpass = ctx.createBiquadFilter();
+      highpass.type = "highpass";
+      highpass.frequency.value = 60;
+      const lowpass = ctx.createBiquadFilter();
+      lowpass.type = "lowpass";
+      lowpass.frequency.value = 2000;
+
       const analyser = ctx.createAnalyser();
-      analyser.fftSize = 4096;
-      source.connect(analyser);
+      analyser.fftSize = 8192;
+      source.connect(highpass);
+      highpass.connect(lowpass);
+      lowpass.connect(analyser);
+
       const buffer = new Float32Array(analyser.fftSize);
+      const history: number[] = [];
       let raf = 0;
+      let lastHit = 0;
 
       const tick = () => {
         analyser.getFloatTimeDomainData(buffer);
-        const freq = detectPitch(buffer, ctx.sampleRate);
+        const freq = detectPitch(buffer, ctx.sampleRate, {
+          minFrequency: 60,
+          maxFrequency: 1200,
+        });
+
         if (freq) {
-          let best = stringsRef.current[0] ?? "E2";
-          let bestDelta = Infinity;
-          for (const note of stringsRef.current) {
-            const delta = Math.abs(centsOff(freq, midiToFrequency(nameToMidi(note))));
-            if (delta < bestDelta) {
-              bestDelta = delta;
-              best = note;
-            }
+          // Drop obvious octave jumps against the recent median.
+          const previous = medianFrequency(history);
+          let candidate = freq;
+          if (previous) {
+            const ratio = candidate / previous;
+            if (ratio > 1.8 && ratio < 2.2) candidate = candidate / 2;
+            else if (ratio < 0.55 && ratio > 0.45) candidate = candidate * 2;
           }
-          const targetFrequency = midiToFrequency(nameToMidi(best));
-          setReading({
-            frequency: freq,
-            targetNote: best,
-            targetFrequency,
-            cents: centsOff(freq, targetFrequency),
-          });
+          history.push(candidate);
+          if (history.length > HISTORY) history.shift();
+
+          const smoothed = medianFrequency(history);
+          if (smoothed) {
+            let best = lockedRef.current ?? stringsRef.current[0] ?? "E2";
+            if (!lockedRef.current) {
+              let bestDelta = Infinity;
+              for (const note of stringsRef.current) {
+                const delta = Math.abs(centsOff(smoothed, midiToFrequency(nameToMidi(note))));
+                if (delta < bestDelta) {
+                  bestDelta = delta;
+                  best = note;
+                }
+              }
+            }
+            const targetFrequency = midiToFrequency(nameToMidi(best));
+            lastHit = performance.now();
+            setReading({
+              frequency: smoothed,
+              targetNote: best,
+              targetFrequency,
+              cents: centsOff(smoothed, targetFrequency),
+              at: lastHit,
+            });
+          }
+        } else if (lastHit && performance.now() - lastHit > SIGNAL_TIMEOUT_MS) {
+          history.length = 0;
+          lastHit = 0;
+          setReading(null);
         }
+
         raf = requestAnimationFrame(tick);
       };
       raf = requestAnimationFrame(tick);
