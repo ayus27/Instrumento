@@ -17,31 +17,36 @@ export function DrumTuner() {
   const fresh = reading && performance.now() - reading.at < 1500;
 
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-5 px-4 py-6 sm:px-5 sm:py-8">
-      <header className="hairline grid grid-cols-1 items-end gap-3 pb-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-4">
-        <div className="min-w-0">
-          <h1 className="font-display text-3xl uppercase tracking-tight sm:text-4xl">Drum Tuner</h1>
-          <p className="label-mono mt-1">Microphone pitch analysis for drum heads</p>
-        </div>
+    <div className="mx-auto w-full max-w-2xl space-y-6 px-5 pb-20 pt-10 sm:pt-14">
+      <header className="text-center">
+        <h1 className="font-display text-3xl tracking-[-0.03em] sm:text-4xl">Drum Tuner</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Microphone pitch analysis for drum heads
+        </p>
         <button
           type="button"
-          className={`${controlButtonClass} w-full sm:w-auto`}
+          className="mt-6 rounded-full px-8 py-3 text-sm font-medium transition-opacity hover:opacity-90"
+          style={
+            listening
+              ? { border: "1px solid var(--panel-edge)" }
+              : { backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }
+          }
           onClick={() => (listening ? stop() : void start())}
         >
-          {listening ? "Stop microphone" : "Enable microphone"}
+          {listening ? "Stop microphone" : "Start tuning"}
         </button>
       </header>
-
 
       {error && (
         <p
           role="alert"
-          className="border p-3 font-mono text-xs"
+          className="rounded-xl border p-3 text-center text-xs"
           style={{ borderColor: "var(--destructive)", color: "var(--destructive)" }}
         >
           {error}
         </p>
       )}
+
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="panel space-y-2 p-4">
