@@ -56,50 +56,50 @@ function Index() {
           height={160}
         />
         <h1 className="sr-only">Instrumento</h1>
-        <p className="mt-8 max-w-2xl font-display text-3xl leading-[1.1] tracking-[-0.03em] sm:text-5xl">
-          Play, learn and record{" "}
-          <span style={{ color: "var(--signal)" }}>real instruments</span> right in your browser.
+        <p className="mt-8 max-w-2xl text-display text-4xl leading-[1.1] sm:text-6xl text-foreground">
+          PLAY. CREATE. LEARN.
         </p>
         <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
-          Piano, guitar, drums and ukulele — with lessons, chords, jam tracks, a songbook and
-          precision tuners. No downloads, no setup.
+          Real instruments, beats, songs and music creation — directly in your browser.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <Link
-            to="/piano"
-            className="rounded-full bg-primary px-7 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+            to="/create"
+            className="rounded-full bg-signal px-7 py-3 text-sm font-bold text-primary-foreground transition-all hover:bg-signal-dim hover:scale-[1.02]"
           >
-            Start playing
+            START CREATING
           </Link>
           <Link
-            to="/practice"
-            className="rounded-full border border-panel-edge px-7 py-3 text-sm font-medium transition-colors hover:bg-accent"
+            to="/piano"
+            className="rounded-full border border-panel-edge px-7 py-3 text-sm font-bold transition-all hover:bg-accent hover:scale-[1.02]"
           >
-            Take a lesson
+            PLAY AN INSTRUMENT
           </Link>
         </div>
       </section>
 
       <section className="mt-24">
-        <h2 className="font-display text-2xl tracking-[-0.03em] sm:text-3xl">Instruments</h2>
+        <h2 className="text-display text-2xl sm:text-3xl">Instruments</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {INSTRUMENTS.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="soft-card flex items-baseline justify-between px-6 py-8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
+              className="soft-card group relative flex items-center justify-between overflow-hidden px-6 py-8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
             >
-              <span className="font-display text-2xl tracking-[-0.02em] sm:text-3xl">
+              <span className="text-display text-2xl sm:text-3xl relative z-10 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-signal">
                 {item.name}
               </span>
-              <span className="label-mono text-right">{item.detail}</span>
+              <span className="text-technical text-right relative z-10 transition-opacity duration-200 group-hover:opacity-100 opacity-60">
+                {item.detail}
+              </span>
             </Link>
           ))}
         </div>
       </section>
 
       <section className="mt-20">
-        <h2 className="font-display text-2xl tracking-[-0.03em] sm:text-3xl">
+        <h2 className="text-display text-2xl sm:text-3xl">
           Learn, practice &amp; create
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
@@ -107,31 +107,31 @@ function Index() {
             <Link
               key={item.to}
               to={item.to}
-              className="soft-card flex flex-col justify-between px-6 py-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
+              className="soft-card group flex flex-col justify-between px-6 py-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
             >
               <span
-                className="font-display text-xl tracking-[-0.02em]"
+                className="text-display text-xl transition-transform duration-200 group-hover:-translate-y-1"
                 style={{ color: "var(--signal)" }}
               >
                 {item.name}
               </span>
-              <span className="label-mono mt-4">{item.detail}</span>
+              <span className="text-technical mt-4">{item.detail}</span>
             </Link>
           ))}
         </div>
       </section>
 
       <section className="mt-20">
-        <h2 className="font-display text-2xl tracking-[-0.03em] sm:text-3xl">Tuners</h2>
+        <h2 className="text-display text-2xl sm:text-3xl">Tools</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
           {TUNERS.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="soft-card flex flex-col justify-between px-6 py-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
+              className="soft-card group flex flex-col justify-between px-6 py-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
             >
-              <span className="font-display text-xl tracking-[-0.02em]">{item.name}</span>
-              <span className="label-mono mt-4">{item.detail}</span>
+              <span className="text-display text-xl transition-transform duration-200 group-hover:-translate-y-1">{item.name}</span>
+              <span className="text-technical mt-4">{item.detail}</span>
             </Link>
           ))}
         </div>

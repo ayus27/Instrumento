@@ -17,6 +17,7 @@ import { Route as GuitarRouteImport } from './routes/guitar'
 import { Route as JamRouteImport } from './routes/jam'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as MyMusicRouteImport } from './routes/my-music'
 import { Route as PianoRouteImport } from './routes/piano'
 import { Route as RecordingsRouteImport } from './routes/recordings'
 import { Route as SignupRouteImport } from './routes/signup'
@@ -25,6 +26,9 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AdminSongsRouteImport } from './routes/admin.songs'
 import { Route as ApiPreferencesRouteImport } from './routes/api/preferences'
+import { Route as CreateIndexRouteImport } from './routes/create.index'
+import { Route as CreateBeatLabRouteImport } from './routes/create.beat-lab'
+import { Route as CreateProjectsRouteImport } from './routes/create.projects'
 import { Route as DrumsIndexRouteImport } from './routes/drums.index'
 import { Route as DrumsTunerRouteImport } from './routes/drums.tuner'
 import { Route as PracticeIndexRouteImport } from './routes/practice.index'
@@ -85,6 +89,11 @@ const McpRoute = McpRouteImport.update({
   path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MyMusicRoute = MyMusicRouteImport.update({
+  id: '/my-music',
+  path: '/my-music',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PianoRoute = PianoRouteImport.update({
   id: '/piano',
   path: '/piano',
@@ -125,6 +134,21 @@ const AdminSongsRoute = AdminSongsRouteImport.update({
 const ApiPreferencesRoute = ApiPreferencesRouteImport.update({
   id: '/api/preferences',
   path: '/api/preferences',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreateIndexRoute = CreateIndexRouteImport.update({
+  id: '/create/',
+  path: '/create/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreateBeatLabRoute = CreateBeatLabRouteImport.update({
+  id: '/create/beat-lab',
+  path: '/create/beat-lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreateProjectsRoute = CreateProjectsRouteImport.update({
+  id: '/create/projects',
+  path: '/create/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DrumsIndexRoute = DrumsIndexRouteImport.update({
@@ -233,6 +257,7 @@ export interface FileRoutesByFullPath {
   '/jam': typeof JamRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/my-music': typeof MyMusicRoute
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
@@ -241,6 +266,8 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
+  '/create/beat-lab': typeof CreateBeatLabRoute
+  '/create/projects': typeof CreateProjectsRoute
   '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
   '/practice/ear': typeof PracticeEarRoute
@@ -249,6 +276,7 @@ export interface FileRoutesByFullPath {
   '/tuners/drums': typeof TunersDrumsRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/create/': typeof CreateIndexRoute
   '/drums/': typeof DrumsIndexRoute
   '/practice/': typeof PracticeIndexRoute
   '/songs/': typeof SongsIndexRoute
@@ -270,6 +298,7 @@ export interface FileRoutesByTo {
   '/jam': typeof JamRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/my-music': typeof MyMusicRoute
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
@@ -278,6 +307,8 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
+  '/create/beat-lab': typeof CreateBeatLabRoute
+  '/create/projects': typeof CreateProjectsRoute
   '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
   '/practice/ear': typeof PracticeEarRoute
@@ -286,6 +317,7 @@ export interface FileRoutesByTo {
   '/tuners/drums': typeof TunersDrumsRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/create': typeof CreateIndexRoute
   '/drums': typeof DrumsIndexRoute
   '/practice': typeof PracticeIndexRoute
   '/songs': typeof SongsIndexRoute
@@ -308,6 +340,7 @@ export interface FileRoutesById {
   '/jam': typeof JamRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/my-music': typeof MyMusicRoute
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
@@ -316,6 +349,8 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
+  '/create/beat-lab': typeof CreateBeatLabRoute
+  '/create/projects': typeof CreateProjectsRoute
   '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
   '/practice/ear': typeof PracticeEarRoute
@@ -324,6 +359,7 @@ export interface FileRoutesById {
   '/tuners/drums': typeof TunersDrumsRoute
   '/tuners/guitar': typeof TunersGuitarRoute
   '/tuners/ukulele': typeof TunersUkuleleRoute
+  '/create/': typeof CreateIndexRoute
   '/drums/': typeof DrumsIndexRoute
   '/practice/': typeof PracticeIndexRoute
   '/songs/': typeof SongsIndexRoute
@@ -347,6 +383,7 @@ export interface FileRouteTypes {
     | '/jam'
     | '/login'
     | '/mcp'
+    | '/my-music'
     | '/piano'
     | '/recordings'
     | '/signup'
@@ -355,6 +392,8 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
+    | '/create/beat-lab'
+    | '/create/projects'
     | '/drums/tuner'
     | '/practice/challenges'
     | '/practice/ear'
@@ -363,6 +402,7 @@ export interface FileRouteTypes {
     | '/tuners/drums'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/create/'
     | '/drums/'
     | '/practice/'
     | '/songs/'
@@ -384,6 +424,7 @@ export interface FileRouteTypes {
     | '/jam'
     | '/login'
     | '/mcp'
+    | '/my-music'
     | '/piano'
     | '/recordings'
     | '/signup'
@@ -392,6 +433,8 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
+    | '/create/beat-lab'
+    | '/create/projects'
     | '/drums/tuner'
     | '/practice/challenges'
     | '/practice/ear'
@@ -400,6 +443,7 @@ export interface FileRouteTypes {
     | '/tuners/drums'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/create'
     | '/drums'
     | '/practice'
     | '/songs'
@@ -421,6 +465,7 @@ export interface FileRouteTypes {
     | '/jam'
     | '/login'
     | '/mcp'
+    | '/my-music'
     | '/piano'
     | '/recordings'
     | '/signup'
@@ -429,6 +474,8 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
+    | '/create/beat-lab'
+    | '/create/projects'
     | '/drums/tuner'
     | '/practice/challenges'
     | '/practice/ear'
@@ -437,6 +484,7 @@ export interface FileRouteTypes {
     | '/tuners/drums'
     | '/tuners/guitar'
     | '/tuners/ukulele'
+    | '/create/'
     | '/drums/'
     | '/practice/'
     | '/songs/'
@@ -459,6 +507,7 @@ export interface RootRouteChildren {
   JamRoute: typeof JamRoute
   LoginRoute: typeof LoginRoute
   McpRoute: typeof McpRoute
+  MyMusicRoute: typeof MyMusicRoute
   PianoRoute: typeof PianoRoute
   RecordingsRoute: typeof RecordingsRoute
   SignupRoute: typeof SignupRoute
@@ -467,6 +516,8 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminSongsRoute: typeof AdminSongsRoute
   ApiPreferencesRoute: typeof ApiPreferencesRoute
+  CreateBeatLabRoute: typeof CreateBeatLabRoute
+  CreateProjectsRoute: typeof CreateProjectsRoute
   DrumsTunerRoute: typeof DrumsTunerRoute
   PracticeChallengesRoute: typeof PracticeChallengesRoute
   PracticeEarRoute: typeof PracticeEarRoute
@@ -475,6 +526,7 @@ export interface RootRouteChildren {
   TunersDrumsRoute: typeof TunersDrumsRoute
   TunersGuitarRoute: typeof TunersGuitarRoute
   TunersUkuleleRoute: typeof TunersUkuleleRoute
+  CreateIndexRoute: typeof CreateIndexRoute
   DrumsIndexRoute: typeof DrumsIndexRoute
   PracticeIndexRoute: typeof PracticeIndexRoute
   SongsIndexRoute: typeof SongsIndexRoute
@@ -546,6 +598,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/my-music': {
+      id: '/my-music'
+      path: '/my-music'
+      fullPath: '/my-music'
+      preLoaderRoute: typeof MyMusicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/piano': {
       id: '/piano'
       path: '/piano'
@@ -600,6 +659,27 @@ declare module '@tanstack/react-router' {
       path: '/api/preferences'
       fullPath: '/api/preferences'
       preLoaderRoute: typeof ApiPreferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/create/': {
+      id: '/create/'
+      path: '/create'
+      fullPath: '/create/'
+      preLoaderRoute: typeof CreateIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/create/beat-lab': {
+      id: '/create/beat-lab'
+      path: '/create/beat-lab'
+      fullPath: '/create/beat-lab'
+      preLoaderRoute: typeof CreateBeatLabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/create/projects': {
+      id: '/create/projects'
+      path: '/create/projects'
+      fullPath: '/create/projects'
+      preLoaderRoute: typeof CreateProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/drums/': {
@@ -747,6 +827,7 @@ const rootRouteChildren: RootRouteChildren = {
   JamRoute: JamRoute,
   LoginRoute: LoginRoute,
   McpRoute: McpRoute,
+  MyMusicRoute: MyMusicRoute,
   PianoRoute: PianoRoute,
   RecordingsRoute: RecordingsRoute,
   SignupRoute: SignupRoute,
@@ -756,6 +837,8 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminSongsRoute: AdminSongsRoute,
   ApiPreferencesRoute: ApiPreferencesRoute,
+  CreateBeatLabRoute: CreateBeatLabRoute,
+  CreateProjectsRoute: CreateProjectsRoute,
   DrumsTunerRoute: DrumsTunerRoute,
   PracticeChallengesRoute: PracticeChallengesRoute,
   PracticeEarRoute: PracticeEarRoute,
@@ -764,6 +847,7 @@ const rootRouteChildren: RootRouteChildren = {
   TunersDrumsRoute: TunersDrumsRoute,
   TunersGuitarRoute: TunersGuitarRoute,
   TunersUkuleleRoute: TunersUkuleleRoute,
+  CreateIndexRoute: CreateIndexRoute,
   DrumsIndexRoute: DrumsIndexRoute,
   PracticeIndexRoute: PracticeIndexRoute,
   SongsIndexRoute: SongsIndexRoute,

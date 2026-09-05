@@ -9,34 +9,36 @@ const GROUPS = [
   {
     label: "Play",
     items: [
-      { to: "/piano", label: "Piano" },
-      { to: "/guitar", label: "Guitar" },
-      { to: "/drums", label: "Drums" },
-      { to: "/ukulele", label: "Ukulele" },
+      { to: "/piano", label: "Piano", detail: "Polyphonic & MIDI" },
+      { to: "/guitar", label: "Guitar", detail: "Acoustic & Electric" },
+      { to: "/drums", label: "Drums", detail: "7 Pads & Keys" },
+      { to: "/ukulele", label: "Ukulele", detail: "Standard GCEA" },
     ],
   },
   {
     label: "Learn",
     items: [
-      { to: "/practice", label: "Practice" },
-      { to: "/chords", label: "Chords" },
-      { to: "/songs", label: "Songs" },
+      { to: "/practice", label: "Practice Suite", detail: "Lessons & Drills" },
+      { to: "/chords", label: "Chords", detail: "Interactive Library" },
+      { to: "/songs", label: "Songbook", detail: "Lyrics & Chords" },
     ],
   },
   {
     label: "Create",
     items: [
-      { to: "/jam", label: "Jam Mode" },
-      { to: "/grooves", label: "Grooves" },
-      { to: "/recordings", label: "Recordings" },
+      { to: "/create", label: "Studio", detail: "Multi-track DAW" },
+      { to: "/create/beat-lab", label: "Beat Lab", detail: "Step Sequencer" },
+      { to: "/my-music", label: "My Music", detail: "Projects & Takes" },
+      { to: "/jam", label: "Jam Mode", detail: "Backing Tracks" },
+      { to: "/recordings", label: "Legacy Takes", detail: "Local Audio" },
     ],
   },
   {
-    label: "Tuners",
+    label: "Tools",
     items: [
-      { to: "/tuners/guitar", label: "Guitar Tuner" },
-      { to: "/tuners/ukulele", label: "Ukulele Tuner" },
-      { to: "/tuners/drums", label: "Drum Tuner" },
+      { to: "/tuners/guitar", label: "Guitar Tuner", detail: "Mic Pitch Detector" },
+      { to: "/tuners/ukulele", label: "Ukulele Tuner", detail: "Mic Pitch Detector" },
+      { to: "/tuners/drums", label: "Drum Tuner", detail: "Head Pitch & Cents" },
     ],
   },
 ];
@@ -110,7 +112,12 @@ export function SiteHeader() {
                         className="block rounded-lg px-3 py-2 text-[13px] transition-colors hover:bg-accent hover:text-foreground"
                         activeProps={{ style: { color: "var(--signal)" } }}
                       >
-                        {item.label}
+                        <div className="font-medium">{item.label}</div>
+                        {item.detail && (
+                          <div className="mt-0.5 text-[11px] text-muted-foreground">
+                            {item.detail}
+                          </div>
+                        )}
                       </Link>
                     ))}
                   </div>

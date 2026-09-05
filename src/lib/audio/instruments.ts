@@ -73,54 +73,64 @@ export function createInstrument(
 ): Voice {
   switch (id) {
     case "piano-grand": {
-      const reverb = new Tone.Reverb({ decay: 2.4, wet: 0.18 }).connect(destination);
+      const eq = new Tone.EQ3({ low: 2, mid: -1, high: 2 }).connect(destination);
+      const reverb = new Tone.Reverb({ decay: 2.8, wet: 0.2 }).connect(eq);
       const poly = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "triangle" },
-        envelope: { attack: 0.004, decay: 1.6, sustain: 0.18, release: 1.1 },
+        envelope: { attack: 0.005, decay: 1.8, sustain: 0.22, release: 1.4 },
       }).connect(reverb);
-      poly.maxPolyphony = 24;
-      return polyVoice(poly, [reverb]);
+      poly.maxPolyphony = 32;
+      return polyVoice(poly, [reverb, eq]);
     }
     case "piano-soft": {
-      const reverb = new Tone.Reverb({ decay: 3.6, wet: 0.32 }).connect(destination);
+      const eq = new Tone.EQ3({ low: 3, mid: 0, high: -3 }).connect(destination);
+      const reverb = new Tone.Reverb({ decay: 3.6, wet: 0.35 }).connect(eq);
       const poly = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "sine" },
-        envelope: { attack: 0.06, decay: 2.2, sustain: 0.25, release: 1.8 },
+        envelope: { attack: 0.08, decay: 2.5, sustain: 0.3, release: 2.0 },
       }).connect(reverb);
-      poly.maxPolyphony = 24;
-      return polyVoice(poly, [reverb]);
+      poly.maxPolyphony = 32;
+      return polyVoice(poly, [reverb, eq]);
     }
     case "piano-electric": {
-      const chorus = new Tone.Chorus({ frequency: 1.2, depth: 0.5, wet: 0.3 })
-        .connect(destination)
+      const eq = new Tone.EQ3({ low: 2, mid: 1, high: 4 }).connect(destination);
+      const chorus = new Tone.Chorus({ frequency: 1.5, depth: 0.6, wet: 0.4 })
+        .connect(eq)
         .start();
       const poly = new Tone.PolySynth(Tone.FMSynth, {
         harmonicity: 3.01,
-        modulationIndex: 9,
-        envelope: { attack: 0.004, decay: 1.2, sustain: 0.14, release: 0.9 },
-        modulationEnvelope: { attack: 0.01, decay: 0.4, sustain: 0.05, release: 0.4 },
+        modulationIndex: 12,
+        envelope: { attack: 0.005, decay: 1.4, sustain: 0.18, release: 1.2 },
+        modulationEnvelope: { attack: 0.02, decay: 0.5, sustain: 0.08, release: 0.6 },
       }).connect(chorus);
-      poly.maxPolyphony = 24;
-      return polyVoice(poly, [chorus]);
+      poly.maxPolyphony = 32;
+      return polyVoice(poly, [chorus, eq]);
     }
     case "guitar-acoustic": {
-      const body = new Tone.Filter({ type: "lowpass", frequency: 4800 }).connect(destination);
-      const reverb = new Tone.Reverb({ decay: 1.6, wet: 0.14 }).connect(body);
+      const eq = new Tone.EQ3({ low: 2, mid: 0, high: 2 }).connect(destination);
+      const body = new Tone.Filter({ type: "lowpass", frequency: 3200, Q: 1.5 }).connect(eq);
+      const reverb = new Tone.Reverb({ decay: 2.5, wet: 0.18 }).connect(body);
+      
+      // Increased pool size and tuned for better string resonance
       return pluckVoice(
         Tone,
         destination,
-        { attackNoise: 1.1, dampening: 3600, resonance: 0.96 },
-        [reverb, body],
+        { attackNoise: 1.2, dampening: 4200, resonance: 0.98 },
+        [reverb, body, eq],
       );
     }
     case "guitar-electric": {
-      const dist = new Tone.Distortion(0.42).connect(destination);
-      const filter = new Tone.Filter({ type: "lowpass", frequency: 2600 }).connect(dist);
+      const eq = new Tone.EQ3({ low: 4, mid: -2, high: 1 }).connect(destination);
+      // Amp sim style
+      const dist = new Tone.Distortion(0.55).connect(eq);
+      const filter = new Tone.Filter({ type: "lowpass", frequency: 2800 }).connect(dist);
+      const chorus = new Tone.Chorus({ frequency: 1.5, depth: 0.3, wet: 0.2 }).connect(filter);
+      
       return pluckVoice(
         Tone,
         destination,
-        { attackNoise: 0.6, dampening: 2400, resonance: 0.985 },
-        [filter, dist],
+        { attackNoise: 0.8, dampening: 2800, resonance: 0.99 },
+        [chorus, filter, dist, eq],
       );
     }
     case "ukulele": {

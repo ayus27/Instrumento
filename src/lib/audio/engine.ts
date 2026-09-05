@@ -74,6 +74,27 @@ class AudioEngine {
     return this.tone?.getTransport() ?? null;
   }
 
+  setLooping(start: number, end: number) {
+    if (!this.transport) return;
+    this.transport.loopStart = start;
+    this.transport.loopEnd = end;
+    this.transport.loop = true;
+  }
+
+  clearLoop() {
+    if (!this.transport) return;
+    this.transport.loop = false;
+  }
+
+  getPosition(): number {
+    return this.transport?.ticks ?? 0;
+  }
+
+  seekTo(position: number) {
+    if (!this.transport) return;
+    this.transport.ticks = position;
+  }
+
   now(): number {
     return this.tone?.now() ?? 0;
   }

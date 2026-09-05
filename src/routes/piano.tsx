@@ -128,58 +128,65 @@ function PianoPage() {
             getEngine().setVolume(v);
           }}
           extra={
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-1">
-                {TONES.map((t) => (
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="control-group">
+                <span className="text-technical mr-2">SOUND</span>
+                <div className="flex items-center gap-1">
+                  {TONES.map((t) => (
+                    <button
+                      key={t.id}
+                      type="button"
+                      className={controlButtonClass}
+                      onClick={() => setTone(t.id)}
+                      style={
+                        tone === t.id
+                          ? { backgroundColor: "var(--signal)", color: "var(--primary-foreground)" }
+                          : undefined
+                      }
+                    >
+                      {t.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="control-group">
+                <span className="text-technical mr-2">PERFORMANCE</span>
+                <div className="flex items-center gap-1">
                   <button
-                    key={t.id}
                     type="button"
+                    aria-label="Octave down"
                     className={controlButtonClass}
-                    onClick={() => setTone(t.id)}
-                    style={
-                      tone === t.id
-                        ? { backgroundColor: "var(--signal)", color: "var(--primary-foreground)" }
-                        : undefined
-                    }
+                    onClick={() => setOctave((o) => Math.max(1, o - 1))}
                   >
-                    {t.label}
+                    −
                   </button>
-                ))}
-              </div>
-              <div className="flex items-center gap-1">
+                  <span className="label-mono w-20 text-center">Octave {octave}</span>
+                  <button
+                    type="button"
+                    aria-label="Octave up"
+                    className={controlButtonClass}
+                    onClick={() => setOctave((o) => Math.min(6, o + 1))}
+                  >
+                    +
+                  </button>
+                </div>
                 <button
                   type="button"
-                  aria-label="Octave down"
                   className={controlButtonClass}
-                  onClick={() => setOctave((o) => Math.max(1, o - 1))}
+                  onPointerDown={() => setSustain(true)}
+                  onPointerUp={() => setSustain(false)}
+                  onPointerLeave={() => sustainOn && setSustain(false)}
+                  onClick={() => undefined}
+                  style={
+                    sustainOn
+                      ? { backgroundColor: "var(--signal)", color: "var(--primary-foreground)" }
+                      : undefined
+                  }
                 >
-                  −
-                </button>
-                <span className="label-mono w-20 text-center">Octave {octave}</span>
-                <button
-                  type="button"
-                  aria-label="Octave up"
-                  className={controlButtonClass}
-                  onClick={() => setOctave((o) => Math.min(6, o + 1))}
-                >
-                  +
+                  Sustain (Space)
                 </button>
               </div>
-              <button
-                type="button"
-                className={controlButtonClass}
-                onPointerDown={() => setSustain(true)}
-                onPointerUp={() => setSustain(false)}
-                onPointerLeave={() => sustainOn && setSustain(false)}
-                onClick={() => undefined}
-                style={
-                  sustainOn
-                    ? { backgroundColor: "var(--signal)", color: "var(--primary-foreground)" }
-                    : undefined
-                }
-              >
-                Sustain (Space)
-              </button>
             </div>
           }
         />

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getEngine, type InstrumentId, type Voice } from "@/lib/audio/engine";
 import { getRecorder } from "@/lib/audio/recorder";
+import { getMidiEngine } from "@/lib/audio/midi-engine";
 
 export type InstrumentStatus = "idle" | "loading" | "ready" | "error";
 
@@ -102,6 +103,38 @@ export function useInstrument(id: InstrumentId) {
   }, [syncActive]);
 
   useEffect(() => () => voiceRef.current?.releaseAll(), []);
+
+  useEffect(() => {
+    const midi = getMidiEngine();
+    
+    // MIDI note number to Note name approximation for Tone.js
+    // Tone.Frequency(midiNote, "midi").toNote() handles this inside the engine
+    // but our components use strings like "C4". We will pass the MIDI number 
+    // and rely on Tone.js or our voice wrappers to handle it (Tone handles both).
+    
+    const cleanupOn = midi.onNoteOn((e) => {
+      // Basic channel routing: if we are drums, listen to channel 10
+      // In this simple app, we'll just listen to all for now.
+      noteOn(e.note.toString(), e.velocity);
+    });
+
+    const cleanupOff = midi.onNoteOff((e) => {
+      noteOff(e.note.toString());
+    });
+
+    const cleanupCC = midi.onCC((e) => {
+      // CC 64 is sustain pedal
+      if (e.controller === 64) {
+        setSustain(e.value > 0.5);
+      }
+    });
+
+    return () => {
+      cleanupOn();
+      cleanupOff();
+      cleanupCC();
+    };
+  }, [noteOn, noteOff, setSustain]);
 
   return { status, error, active, ensure, noteOn, noteOff, hit, setSustain, panic };
 }

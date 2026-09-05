@@ -87,6 +87,26 @@
   --intune: oklch(0.78 0.17 145);
 
   --shadow-soft: 0 1px 2px oklch(0 0 0 / 18%), 0 14px 40px -22px oklch(0 0 0 / 55%);
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* Studio-specific tokens — darker, more focused environment */
+  --studio-surface: oklch(0.14 0.006 60);
+  --studio-surface-elevated: oklch(0.18 0.007 60);
+  --studio-border: oklch(0.26 0.01 60);
+  --studio-track: oklch(0.16 0.006 60);
+  --studio-clip: oklch(0.76 0.16 62 / 0.2);
+  --studio-playhead: oklch(0.94 0.012 85);
+  --studio-recording: oklch(0.62 0.22 25);
 }
 
 @layer base {
@@ -152,6 +172,41 @@
   border-bottom: 1px solid var(--color-border);
 }
 
+@utility studio-bg {
+  background-color: var(--studio-surface);
+  background-image: none;
+}
+
+@utility studio-panel {
+  background-color: var(--studio-surface-elevated);
+  border: 1px solid var(--studio-border);
+  border-radius: var(--radius-sm);
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+@utility text-technical {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+@utility control-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-panel-edge);
+  border-radius: var(--radius-sm);
+  background-color: color-mix(in oklch, var(--color-panel) 60%, transparent);
+}
 
 @keyframes rec-pulse {
   0%,
