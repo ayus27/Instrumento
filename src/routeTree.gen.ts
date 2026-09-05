@@ -27,7 +27,6 @@ import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } fr
 import { Route as AdminSongsRouteImport } from './routes/admin.songs'
 import { Route as ApiPreferencesRouteImport } from './routes/api/preferences'
 import { Route as CreateIndexRouteImport } from './routes/create.index'
-import { Route as CreateBeatLabRouteImport } from './routes/create.beat-lab'
 import { Route as CreateProjectsRouteImport } from './routes/create.projects'
 import { Route as DrumsIndexRouteImport } from './routes/drums.index'
 import { Route as DrumsTunerRouteImport } from './routes/drums.tuner'
@@ -139,11 +138,6 @@ const ApiPreferencesRoute = ApiPreferencesRouteImport.update({
 const CreateIndexRoute = CreateIndexRouteImport.update({
   id: '/create/',
   path: '/create/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CreateBeatLabRoute = CreateBeatLabRouteImport.update({
-  id: '/create/beat-lab',
-  path: '/create/beat-lab',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreateProjectsRoute = CreateProjectsRouteImport.update({
@@ -266,7 +260,6 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
-  '/create/beat-lab': typeof CreateBeatLabRoute
   '/create/projects': typeof CreateProjectsRoute
   '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
@@ -307,7 +300,6 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
-  '/create/beat-lab': typeof CreateBeatLabRoute
   '/create/projects': typeof CreateProjectsRoute
   '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
@@ -349,7 +341,6 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/songs': typeof AdminSongsRoute
   '/api/preferences': typeof ApiPreferencesRoute
-  '/create/beat-lab': typeof CreateBeatLabRoute
   '/create/projects': typeof CreateProjectsRoute
   '/drums/tuner': typeof DrumsTunerRoute
   '/practice/challenges': typeof PracticeChallengesRoute
@@ -392,7 +383,6 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
-    | '/create/beat-lab'
     | '/create/projects'
     | '/drums/tuner'
     | '/practice/challenges'
@@ -433,7 +423,6 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
-    | '/create/beat-lab'
     | '/create/projects'
     | '/drums/tuner'
     | '/practice/challenges'
@@ -474,7 +463,6 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/songs'
     | '/api/preferences'
-    | '/create/beat-lab'
     | '/create/projects'
     | '/drums/tuner'
     | '/practice/challenges'
@@ -516,7 +504,6 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminSongsRoute: typeof AdminSongsRoute
   ApiPreferencesRoute: typeof ApiPreferencesRoute
-  CreateBeatLabRoute: typeof CreateBeatLabRoute
   CreateProjectsRoute: typeof CreateProjectsRoute
   DrumsTunerRoute: typeof DrumsTunerRoute
   PracticeChallengesRoute: typeof PracticeChallengesRoute
@@ -666,13 +653,6 @@ declare module '@tanstack/react-router' {
       path: '/create'
       fullPath: '/create/'
       preLoaderRoute: typeof CreateIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/create/beat-lab': {
-      id: '/create/beat-lab'
-      path: '/create/beat-lab'
-      fullPath: '/create/beat-lab'
-      preLoaderRoute: typeof CreateBeatLabRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/create/projects': {
@@ -837,7 +817,6 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminSongsRoute: AdminSongsRoute,
   ApiPreferencesRoute: ApiPreferencesRoute,
-  CreateBeatLabRoute: CreateBeatLabRoute,
   CreateProjectsRoute: CreateProjectsRoute,
   DrumsTunerRoute: DrumsTunerRoute,
   PracticeChallengesRoute: PracticeChallengesRoute,
