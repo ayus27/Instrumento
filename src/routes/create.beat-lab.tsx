@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { Play, Square, Settings2 } from "lucide-react";
-import { BeatLab } from "../../components/studio/BeatLab";
+import { BeatLab } from "../components/studio/BeatLab";
 
 export const Route = createFileRoute("/create/beat-lab")({
   head: () => ({
@@ -46,9 +46,9 @@ function BeatLabPage() {
           />
           <span className="font-mono text-sm text-signal font-bold w-16">110 BPM</span>
         </label>
-        
+
         <label className="flex items-center gap-3">
-          <span className="text-technical flex items-center gap-1"><Settings2 className="w-3 h-3"/> SWING</span>
+          <span className="text-technical flex items-center gap-1"><Settings2 className="w-3 h-3" /> SWING</span>
           <input
             type="range"
             min={0}
@@ -62,9 +62,9 @@ function BeatLabPage() {
 
       {/* Sequencer Grid Area */}
       <div className="studio-panel p-5 overflow-x-auto min-h-[400px] flex items-center justify-center">
-         <div className="min-w-[800px] w-full">
-            <BeatLab steps={16} />
-         </div>
+        <div className="min-w-[800px] w-full">
+          <BeatLab steps={16} />
+        </div>
       </div>
     </div>
   );

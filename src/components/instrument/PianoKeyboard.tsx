@@ -15,7 +15,7 @@ export function PianoKeyboard({
   startMidi,
   keyCount,
   active,
-  keyLabels,
+  keyLabels = {},
   onNoteOn,
   onNoteOff,
   targets = [],
@@ -87,12 +87,12 @@ export function PianoKeyboard({
                   ? "linear-gradient(180deg, var(--signal-dim), var(--signal))"
                   : "linear-gradient(180deg, oklch(0.3 0.01 60), var(--key-black))",
                 transform: on ? "translateY(2px)" : undefined,
-                boxShadow: target 
-                  ? "inset 0 0 0 3px var(--signal)" 
+                boxShadow: target
+                  ? "inset 0 0 0 3px var(--signal)"
                   : "2px 0 5px rgba(0,0,0,0.4), -1px 0 3px rgba(0,0,0,0.2)",
               }}
 
-            onPointerDown={(e) => {
+              onPointerDown={(e) => {
                 e.currentTarget.setPointerCapture(e.pointerId);
                 onNoteOn(note);
               }}
