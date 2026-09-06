@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import logo from "@/assets/instrumento-wordmark.png.asset.json";
-
+import logo from "@/assets/instrumento-wordmark.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -49,7 +48,7 @@ function Index() {
     <div className="mx-auto w-full max-w-6xl px-5 pb-24 pt-14 sm:pt-20">
       <section className="flex flex-col items-center text-center">
         <img
-          src={logo.url}
+          src={logo}
           alt="Instrumento"
           className="logo-mark h-16 w-auto sm:h-24"
           width={481}
