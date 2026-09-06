@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { controlButtonClass } from "@/components/instrument/ControlBar";
 import { useInstrument } from "@/hooks/useInstrument";
+import { getEngine } from "@/lib/audio/engine";
 
 export const Route = createFileRoute("/grooves")({
   head: () => ({
@@ -39,6 +40,8 @@ function GrooveGeneratorPage() {
   const [bpm, setBpm] = useState(110);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(-1);
+  const [isRecording, setIsRecording] = useState(false);
+  const [takeUrl, setTakeUrl] = useState(null);
 
   const drumInst = useInstrument("drums");
   const timerRef = useRef(null);
@@ -96,6 +99,21 @@ function GrooveGeneratorPage() {
     }
   };
 
+  const toggleRecord = async () => {
+    const engine = getEngine();
+    if (isRecording) {
+      const url = await engine.stopAudioRecording();
+      setIsRecording(false);
+      if (url) setTakeUrl(url);
+      return;
+    }
+    await drumInst.ensure();
+    await engine.startAudioRecording();
+    setTakeUrl(null);
+    setIsRecording(true);
+    if (!isPlaying) await togglePlay();
+  };
+
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
@@ -106,7 +124,7 @@ function GrooveGeneratorPage() {
     <div className="mx-auto w-full max-w-6xl px-5 py-8 space-y-8">
       <header className="hairline pb-4 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-display text-4xl uppercase tracking-tight">Drum Groove Generator</h1>
+          <h1 className="font-display text-4xl uppercase tracking-tight">Groove Generator</h1>
           <p className="label-mono mt-1">16-Step Browser Pattern Sequencer</p>
         </div>
 
@@ -118,6 +136,13 @@ function GrooveGeneratorPage() {
           >
             {isPlaying ? "■ Stop Groove" : "▶ Play Groove"}
           </button>
+          <button
+            type="button"
+            onClick={toggleRecord}
+            className={`${controlButtonClass} ${isRecording ? "bg-destructive text-destructive-foreground" : ""}`}
+          >
+            {isRecording ? "■ Stop recording" : "● Record"}
+          </button>
           <button type="button" onClick={randomizeGrid} className={controlButtonClass}>
             Randomize
           </button>
@@ -126,6 +151,16 @@ function GrooveGeneratorPage() {
           </button>
         </div>
       </header>
+
+      {takeUrl && (
+        <div className="panel flex flex-wrap items-center gap-4 p-4">
+          <span className="label-mono">Last take</span>
+          <audio src={takeUrl} controls className="h-9 flex-1 min-w-[220px]" />
+          <a href={takeUrl} download="instrumento-groove.webm" className={controlButtonClass}>
+            Download
+          </a>
+        </div>
+      )}
 
       {/* BPM bar */}
       <div className="panel p-4 flex items-center justify-between">

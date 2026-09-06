@@ -27,11 +27,11 @@ export type MidiEngineState = "unsupported" | "idle" | "requesting" | "ready" | 
 export class MidiEngine {
   state: MidiEngineState = "idle";
   error: string | null = null;
-  inputs: Map<string, WebMidi.MIDIInput> = new Map();
+  inputs: Map<string, any> = new Map();
   devices: MidiDevice[] = [];
   activeInputId: string | null = null;
 
-  private midiAccess: WebMidi.MIDIAccess | null = null;
+  private midiAccess: any | null = null;
   private listeners = new Set<() => void>();
   private noteOnListeners = new Set<(e: MidiEvent) => void>();
   private noteOffListeners = new Set<(e: MidiEvent) => void>();
@@ -101,7 +101,7 @@ export class MidiEngine {
     const newDevices: MidiDevice[] = [];
     let hasActiveInput = false;
 
-    this.midiAccess.inputs.forEach((input) => {
+    this.midiAccess.inputs.forEach((input: any) => {
       this.inputs.set(input.id, input);
       newDevices.push({
         id: input.id,
@@ -150,7 +150,7 @@ export class MidiEngine {
     this.emitStateChange();
   }
 
-  private handleMidiMessage = (msg: WebMidi.MIDIMessageEvent) => {
+  private handleMidiMessage = (msg: any) => {
     const data = msg.data;
     if (!data || data.length < 2) return;
 
