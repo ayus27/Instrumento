@@ -3,7 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { AppearanceMenu } from "@/components/AppearanceMenu";
 import { AccountMenu } from "@/components/AccountMenu";
-import logo from "@/assets/instrumento-wordmark.png.asset.json";
+import logo from "@/assets/instrumento-wordmark.png";
 
 const GROUPS = [
   {
@@ -52,7 +52,7 @@ function Logo({ onClick }) {
       className="shrink-0 transition-opacity hover:opacity-80"
     >
       <img
-        src={logo.url}
+        src={logo}
         alt="Instrumento"
         className="logo-mark h-7 w-auto sm:h-8"
         width={481}
