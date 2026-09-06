@@ -119,11 +119,9 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    background-image: radial-gradient(
-      120% 80% at 50% -10%,
-      color-mix(in oklch, var(--signal) 8%, transparent),
-      transparent 60%
-    );
+    background-image: radial-gradient(120% 80% at 50% -10%,
+        color-mix(in oklch, var(--signal) 8%, transparent),
+        transparent 60%);
     background-attachment: fixed;
   }
 
@@ -209,10 +207,12 @@
 }
 
 @keyframes rec-pulse {
+
   0%,
   100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.25;
   }
@@ -223,6 +223,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -260,11 +261,9 @@
 }
 
 :root[data-theme="light"] body {
-  background-image: radial-gradient(
-    120% 80% at 50% -10%,
-    color-mix(in oklch, var(--signal) 12%, transparent),
-    transparent 60%
-  );
+  background-image: radial-gradient(120% 80% at 50% -10%,
+      color-mix(in oklch, var(--signal) 12%, transparent),
+      transparent 60%);
 }
 
 
@@ -274,16 +273,19 @@
   --primary-foreground: oklch(0.98 0.005 250);
   --ring: oklch(0.6 0.035 250);
 }
+
 :root[data-primary="indigo"] {
   --primary: oklch(0.58 0.08 275);
   --primary-foreground: oklch(0.98 0.005 275);
   --ring: oklch(0.58 0.08 275);
 }
+
 :root[data-primary="sage"] {
   --primary: oklch(0.64 0.055 150);
   --primary-foreground: oklch(0.16 0.02 150);
   --ring: oklch(0.64 0.055 150);
 }
+
 :root[data-primary="rose"] {
   --primary: oklch(0.63 0.07 15);
   --primary-foreground: oklch(0.98 0.005 15);
@@ -295,14 +297,17 @@
   --signal: oklch(0.64 0.04 250);
   --signal-dim: oklch(0.42 0.03 250);
 }
+
 :root[data-accent="indigo"] {
   --signal: oklch(0.62 0.08 275);
   --signal-dim: oklch(0.4 0.05 275);
 }
+
 :root[data-accent="sage"] {
   --signal: oklch(0.66 0.06 150);
   --signal-dim: oklch(0.43 0.04 150);
 }
+
 :root[data-accent="rose"] {
   --signal: oklch(0.66 0.075 15);
   --signal-dim: oklch(0.44 0.05 15);
@@ -312,6 +317,7 @@
 .logo-mark {
   filter: invert(1);
 }
+
 :root[data-theme="light"] .logo-mark {
   filter: none;
 }
