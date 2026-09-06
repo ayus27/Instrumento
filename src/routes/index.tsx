@@ -4,13 +4,13 @@ import logo from "@/assets/instrumento-wordmark.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Instrumento — Browser Music Playground" },
+      { title: "Instrumento" },
       {
         name: "description",
         content:
-          "Browser music playground: play piano, guitar, drums & ukulele, practice lessons & challenges, jam with backing tracks, explore chords, compose grooves & browse songbook.",
+          "Play piano, guitar, drums & ukulele. Practice lessons, challenges & ear training. Create grooves, beats & songs. Jam with backing tracks. Tune instruments.",
       },
-      { property: "og:title", content: "Instrumento — Browser Music Playground" },
+      { property: "og:title", content: "Instrumento" },
       {
         property: "og:description",
         content: "PLAY → LEARN → PRACTICE → CREATE",
@@ -21,25 +21,25 @@ export const Route = createFileRoute("/")({
 });
 
 const INSTRUMENTS = [
-  { to: "/piano", name: "Piano", detail: "Polyphonic · Mouse & Keyboard" },
-  { to: "/guitar", name: "Guitar", detail: "Acoustic & Electric · Fretboard" },
-  { to: "/drums", name: "Drums", detail: "7 Pads · Metronome & Loops" },
-  { to: "/ukulele", name: "Ukulele", detail: "GCEA Soprano · Strum & Pluck" },
+  { to: "/piano", name: "Piano", detail: "Keyboard" },
+  { to: "/guitar", name: "Guitar", detail: "Acoustic & Electric" },
+  { to: "/drums", name: "Drums", detail: "7 Pads" },
+  { to: "/ukulele", name: "Ukulele", detail: "GCEA Soprano" },
 ] as const;
 
 const CREATE_LEARN = [
-  { to: "/practice", name: "Practice Suite", detail: "Lessons · Challenges · History" },
+  { to: "/practice", name: "Practice", detail: "Lessons · Challenges" },
   { to: "/chords", name: "Chord Playground", detail: "Piano, Guitar & Uke Diagrams" },
   { to: "/jam", name: "Jam Mode", detail: "Backing Grooves & Styles" },
   { to: "/grooves", name: "Groove Generator", detail: "16-Step Drum Sequencer" },
-  { to: "/songs", name: "Songbook", detail: "Lyrics · Chords · Auto-Scroll" },
+  { to: "/songs", name: "Songbook", detail: "Lyrics · Chords" },
   { to: "/practice/ear", name: "Ear Training", detail: "Pitch & Chord Recognition" },
 ] as const;
 
 const TUNERS = [
-  { to: "/tuners/guitar", name: "Guitar Tuner", detail: "Mic Pitch Detector" },
-  { to: "/tuners/ukulele", name: "Ukulele Tuner", detail: "Mic Pitch Detector" },
-  { to: "/tuners/drums", name: "Drum Tuner", detail: "Head Pitch & Cents" },
+  { to: "/tuners/guitar", name: "Guitar Tuner" },
+  { to: "/tuners/ukulele", name: "Ukulele Tuner" },
+  { to: "/tuners/drums", name: "Drum Tuner" },
 ] as const;
 
 
