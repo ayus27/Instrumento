@@ -27,7 +27,7 @@ const GROUPS = [
     label: "Create",
     items: [
       { to: "/create", label: "Studio", detail: "Multi-track DAW" },
-      { to: "/create/beat-lab", label: "Beat Lab", detail: "Step Sequencer" },
+      { to: "/grooves", label: "Groove Generator", detail: "Step Sequencer" },
       { to: "/my-music", label: "My Music", detail: "Projects & Takes" },
       { to: "/jam", label: "Jam Mode", detail: "Backing Tracks" },
       { to: "/recordings", label: "Legacy Takes", detail: "Local Audio" },

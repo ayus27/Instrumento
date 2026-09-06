@@ -68,9 +68,9 @@ const emptyPattern = () => {
 
 const basicPattern = () => {
   const p = emptyPattern();
-  p.kick = [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0];
-  p.snare = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0];
-  p.hihat = Array(16).fill(1);
+  p["kick"] = [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0];
+  p["snare"] = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0];
+  p["hihat"] = Array(16).fill(1);
   return p;
 };
 
