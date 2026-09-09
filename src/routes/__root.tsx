@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -125,15 +126,17 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isStudio = pathname === "/create" || pathname.startsWith("/create/");
 
   return (
     <QueryClientProvider client={queryClient}>
       <AppearanceProvider>
         <AuthBridge>
           <div className="flex min-h-screen flex-col">
-            <SiteHeader />
+            {!isStudio && <SiteHeader />}
             {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-            <main className="flex-1">
+            <main className="flex-1 flex flex-col h-full overflow-hidden">
               <Outlet />
             </main>
           </div>
