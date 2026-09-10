@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createSession, json, sessionCookie, verifyPassword } from "@/lib/auth.server";
-import { db } from "@/lib/db.server";
+import { json, sessionCookie } from "@/lib/auth.server";
+import { supabaseServer } from "@/lib/supabase.server";
 
 export const Route = createFileRoute("/api/auth/login")({
   server: {
@@ -19,18 +19,20 @@ export const Route = createFileRoute("/api/auth/login")({
           return json({ error: "Email and password are required." }, 400);
         }
 
-        const sql = db();
-        const rows = await sql`
-          select id, name, email, password_hash from users where email = ${email} limit 1
-        `;
-        const record = rows[0];
-        if (!record || !(await verifyPassword(password, record.password_hash))) {
+        const { data, error } = await supabaseServer().auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error || !data.session) {
           return json({ error: "Incorrect email or password." }, 401);
         }
 
-        const token = await createSession(record.id);
+        const record = data.user;
+        const token = data.session.access_token;
+        
         return json(
-          { user: { id: record.id, name: record.name, email: record.email } },
+          { user: { id: record.id, name: record.user_metadata?.name || "", email: record.email } },
           200,
           { "set-cookie": sessionCookie(token) },
         );

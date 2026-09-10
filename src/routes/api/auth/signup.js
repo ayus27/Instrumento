@@ -1,13 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  createSession,
-  hashPassword,
-  json,
-  sessionCookie,
-  validateEmail,
-  validatePassword,
-} from "@/lib/auth.server";
-import { db } from "@/lib/db.server";
+import { json, sessionCookie, validateEmail, validatePassword } from "@/lib/auth.server";
+import { supabaseServer } from "@/lib/supabase.server";
 
 export const Route = createFileRoute("/api/auth/signup")({
   server: {
@@ -29,21 +22,29 @@ export const Route = createFileRoute("/api/auth/signup")({
         const pwError = validatePassword(password);
         if (pwError) return json({ error: pwError }, 400);
 
-        const sql = db();
-        const existing = await sql`select id from users where email = ${email} limit 1`;
-        if (existing.length) return json({ error: "An account with that email already exists." }, 409);
+        const { data, error } = await supabaseServer().auth.signUp({
+          email,
+          password,
+          options: {
+            data: { name }
+          }
+        });
 
-        const passwordHash = await hashPassword(password);
-        const rows = await sql`
-          insert into users (name, email, password_hash)
-          values (${name}, ${email}, ${passwordHash})
-          returning id, name, email
-        `;
-        const user = rows[0];
-        await sql`insert into user_preferences (user_id) values (${user.id}) on conflict do nothing`;
+        if (error || !data.session) {
+            return json({ error: error?.message || "Could not create account." }, 400);
+        }
 
-        const token = await createSession(user.id);
-        return json({ user }, 201, { "set-cookie": sessionCookie(token) });
+        const user = data.user;
+        const token = data.session.access_token;
+
+        // Initialize user preferences in Supabase
+        await supabaseServer().from("user_preferences").insert({ user_id: user.id });
+
+        return json(
+            { user: { id: user.id, name: user.user_metadata?.name || "", email: user.email } }, 
+            201, 
+            { "set-cookie": sessionCookie(token) }
+        );
       },
     },
   },
