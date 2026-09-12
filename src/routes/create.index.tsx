@@ -19,8 +19,6 @@ import { getEngine, type InstrumentId, type Voice } from "@/lib/audio/engine";
 import { getMicRecorder } from "@/lib/audio/mic-recorder";
 import { midiToName } from "@/lib/audio/notes";
 import { PIANO_KEY_OFFSETS } from "@/lib/audio/pianoKeys";
-import { supabaseClient } from "@/lib/supabase.client";
-import { saveRecordingFn } from "@/lib/recordings.functions";
 
 export const Route = createFileRoute("/create/")({
   head: () => ({
@@ -103,8 +101,6 @@ function StudioPage() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [micState, setMicState] = useState<string>("idle");
-  const [tempRecording, setTempRecording] = useState<{ blob: Blob; url: string; title: string; duration: number } | null>(null);
-  const [uploadState, setUploadState] = useState<"idle" | "uploading" | "saved" | "error">("idle");
   const [step, setStep] = useState(-1);
   const [activeNotes, setActiveNotes] = useState<string[]>([]);
   const [hitPads, setHitPads] = useState<string[]>([]);
@@ -306,13 +302,10 @@ function StudioPage() {
       const blob = await mic.stop();
       setMicState("ready");
       if (blob) {
-        setTempRecording({
-          blob,
-          url: URL.createObjectURL(blob),
-          title: `Mic Take ${tracks.filter((t) => t.kind === "audio").length + 1}`,
-          duration: 0
-        });
-        setUploadState("idle");
+        const track = newTrack("audio", `Mic take ${tracks.filter((t) => t.kind === "audio").length + 1}`);
+        track.audioUrl = URL.createObjectURL(blob);
+        setTracks((prev) => [...prev, track]);
+        setSelectedId(track.id);
       }
       return;
     }
@@ -421,80 +414,6 @@ function StudioPage() {
 
       {micState === "error" && (
         <p className="text-sm text-destructive">Microphone access was denied. Allow it in your browser to record.</p>
-      )}
-
-      {tempRecording && (
-        <div className="panel p-4 space-y-4 border-signal border bg-panel">
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold">Temporary Recording</h3>
-            {uploadState === "uploading" && <span className="text-signal text-sm animate-pulse">Uploading...</span>}
-            {uploadState === "error" && <span className="text-destructive text-sm">Upload failed</span>}
-            {uploadState === "saved" && <span className="text-signal text-sm">Saved!</span>}
-          </div>
-          <audio src={tempRecording.url} controls className="w-full h-8" />
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="label-mono">Title:</span>
-            <input
-              value={tempRecording.title}
-              onChange={(e) => setTempRecording(p => p ? { ...p, title: e.target.value } : null)}
-              disabled={uploadState === "uploading" || uploadState === "saved"}
-              className="bg-transparent font-mono text-sm border-b border-panel-edge focus:outline-none flex-1 min-w-[200px]"
-            />
-          </div>
-          <div className="flex items-center justify-end gap-2">
-            <button
-               type="button"
-               onClick={() => {
-                 URL.revokeObjectURL(tempRecording.url);
-                 setTempRecording(null);
-               }}
-               className="panel px-3 py-1.5 text-xs hover:bg-accent disabled:opacity-50"
-               disabled={uploadState === "uploading"}
-            >
-              Discard
-            </button>
-            <button
-               type="button"
-               onClick={async () => {
-                 setUploadState("uploading");
-                 try {
-                   const { data: { session } } = await supabaseClient.auth.getSession();
-                   if (!session) throw new Error("Not logged in");
-
-                   const reader = new FileReader();
-                   reader.readAsDataURL(tempRecording.blob);
-                   reader.onloadend = async () => {
-                     const base64 = (reader.result as string).split(',')[1];
-                     await saveRecordingFn({
-                       data: {
-                         token: session.access_token,
-                         fileData: base64,
-                         contentType: tempRecording.blob.type,
-                         title: tempRecording.title,
-                         duration: tempRecording.duration
-                       }
-                     });
-                     setUploadState("saved");
-                     setTimeout(() => {
-                       const track = newTrack("audio", tempRecording.title);
-                       track.audioUrl = tempRecording.url;
-                       setTracks((prev) => [...prev, track]);
-                       setSelectedId(track.id);
-                       setTempRecording(null);
-                     }, 1500);
-                   };
-                 } catch (e) {
-                   console.error(e);
-                   setUploadState("error");
-                 }
-               }}
-               disabled={uploadState === "uploading" || uploadState === "saved"}
-               className="bg-signal text-signal-foreground px-3 py-1.5 text-xs rounded hover:opacity-90 disabled:opacity-50"
-            >
-              {uploadState === "uploading" ? "Saving..." : "Save Recording"}
-            </button>
-          </div>
-        </div>
       )}
 
       {/* Add track row */}
