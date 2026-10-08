@@ -21,6 +21,7 @@ import { Route as MyMusicRouteImport } from './routes/my-music'
 import { Route as PianoRouteImport } from './routes/piano'
 import { Route as RecordingsRouteImport } from './routes/recordings'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as UkuleleRouteImport } from './routes/ukulele'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -107,6 +108,11 @@ const RecordingsRoute = RecordingsRouteImport.update({
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UkuleleRoute = UkuleleRouteImport.update({
@@ -261,6 +267,7 @@ export interface FileRoutesByFullPath {
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -302,6 +309,7 @@ export interface FileRoutesByTo {
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -344,6 +352,7 @@ export interface FileRoutesById {
   '/piano': typeof PianoRoute
   '/recordings': typeof RecordingsRoute
   '/signup': typeof SignupRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/ukulele': typeof UkuleleRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -387,6 +396,7 @@ export interface FileRouteTypes {
     | '/piano'
     | '/recordings'
     | '/signup'
+    | '/sitemap.xml'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -428,6 +438,7 @@ export interface FileRouteTypes {
     | '/piano'
     | '/recordings'
     | '/signup'
+    | '/sitemap.xml'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -469,6 +480,7 @@ export interface FileRouteTypes {
     | '/piano'
     | '/recordings'
     | '/signup'
+    | '/sitemap.xml'
     | '/ukulele'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -511,6 +523,7 @@ export interface RootRouteChildren {
   PianoRoute: typeof PianoRoute
   RecordingsRoute: typeof RecordingsRoute
   SignupRoute: typeof SignupRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   UkuleleRoute: typeof UkuleleRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -624,6 +637,13 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ukulele': {
@@ -831,6 +851,7 @@ const rootRouteChildren: RootRouteChildren = {
   PianoRoute: PianoRoute,
   RecordingsRoute: RecordingsRoute,
   SignupRoute: SignupRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   UkuleleRoute: UkuleleRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
