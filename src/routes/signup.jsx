@@ -4,6 +4,7 @@ import { AuthForm } from "@/components/AuthForm";
 import { useAuth } from "@/lib/auth-client";
 
 export const Route = createFileRoute("/signup")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Sign Up — Instrumento" },

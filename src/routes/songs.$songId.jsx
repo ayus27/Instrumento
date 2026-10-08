@@ -3,6 +3,7 @@ import { SongViewer } from "@/components/songs/SongViewer";
 import { getSongById } from "@/lib/songs/songService";
 
 export const Route = createFileRoute("/songs/$songId")({
+  staticData: { sitemap: true },
   loader: ({ params }) => {
     const song = getSongById(params.songId);
     if (!song) throw notFound();

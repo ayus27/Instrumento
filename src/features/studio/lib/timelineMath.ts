@@ -22,7 +22,7 @@ export function secondsToTicks(seconds: number, bpm: number): number {
  * Convert ticks to a Bar:Beat:Sixteenth format for display (1-indexed).
  */
 export function ticksToTransportTime(ticks: number, timeSignature = [4, 4]): string {
-  const [beatsPerBar] = timeSignature;
+  const beatsPerBar = timeSignature[0] ?? 4;
   
   const totalBeats = ticks / PPQ;
   const bars = Math.floor(totalBeats / beatsPerBar);

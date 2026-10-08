@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import logo from "@/assets/instrumento-wordmark.png";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Instrumento" },
@@ -37,9 +38,9 @@ const CREATE_LEARN = [
 ] as const;
 
 const TUNERS = [
-  { to: "/tuners/guitar", name: "Guitar Tuner" },
-  { to: "/tuners/ukulele", name: "Ukulele Tuner" },
-  { to: "/tuners/drums", name: "Drum Tuner" },
+  { to: "/tuners/guitar", name: "Guitar Tuner", detail: "Mic Pitch Detector" },
+  { to: "/tuners/ukulele", name: "Ukulele Tuner", detail: "Mic Pitch Detector" },
+  { to: "/tuners/drums", name: "Drum Tuner", detail: "Head Pitch & Cents" },
 ] as const;
 
 

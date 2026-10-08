@@ -9,6 +9,7 @@ function safeNext(value: unknown): string {
 }
 
 export const Route = createFileRoute("/agent-login")({
+  staticData: { sitemap: false },
   ssr: false,
   head: () => ({
     meta: [

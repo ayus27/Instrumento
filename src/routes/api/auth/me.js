@@ -3,6 +3,7 @@ import { currentUser, json } from "@/lib/auth.server";
 import { db } from "@/lib/db.server";
 
 export const Route = createFileRoute("/api/auth/me")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       GET: async ({ request }) => {

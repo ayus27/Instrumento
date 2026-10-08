@@ -21,6 +21,7 @@ import { midiToName } from "@/lib/audio/notes";
 import { PIANO_KEY_OFFSETS } from "@/lib/audio/pianoKeys";
 
 export const Route = createFileRoute("/create/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Studio — Instrumento" },

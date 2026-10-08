@@ -15,6 +15,7 @@ import { midiToName } from "@/lib/audio/notes";
 import { PIANO_LESSONS } from "@/lib/practice/pianoLessons";
 
 export const Route = createFileRoute("/practice/piano/learn")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Piano Teach Me — Instrumento" },

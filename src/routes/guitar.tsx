@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { FrettedPage } from "@/components/instrument/FrettedPage";
 
 export const Route = createFileRoute("/guitar")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Guitar — Instrumento" },

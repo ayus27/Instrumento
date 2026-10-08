@@ -11,6 +11,7 @@ import { getEngine } from "@/lib/audio/engine";
 import { DRUM_LESSONS, patternHits } from "@/lib/practice/drumLessons";
 
 export const Route = createFileRoute("/practice/drums/learn")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Drum Teach Me — Instrumento" },

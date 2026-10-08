@@ -85,9 +85,9 @@ export class StudioAudioEngine {
     const dest = this.trackBuses.get(trackId);
     if (!dest) return;
 
-    const voice = createInstrument(instrumentId, dest);
+    const voice = createInstrument(Tone as any, instrumentId, dest);
     this.trackInstruments.set(trackId, voice);
-    await voice.load();
+    await Tone.loaded();
   }
 
   public getTrackInstrument(trackId: string): Voice | undefined {

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { clearedCookie, destroySession, json, readSessionCookie } from "@/lib/auth.server";
 
 export const Route = createFileRoute("/api/auth/logout")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request }) => {

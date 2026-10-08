@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { loadRecordings, type SavedRecording } from "@/lib/audio/recorder";
 
 export const Route = createFileRoute("/my-music")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "My Music — Instrumento" },

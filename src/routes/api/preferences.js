@@ -7,6 +7,7 @@ const PRIMARIES = ["amber", "slate", "indigo", "sage", "rose"];
 const ACCENTS = ["amber", "slate", "indigo", "sage", "rose"];
 
 export const Route = createFileRoute("/api/preferences")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       // Users can only read/write their own preferences: the row is keyed on the session user.

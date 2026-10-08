@@ -4,6 +4,7 @@ import { controlButtonClass } from "@/components/instrument/ControlBar";
 import { useInstrument } from "@/hooks/useInstrument";
 
 export const Route = createFileRoute("/practice/ear")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Ear Training — Instrumento" },

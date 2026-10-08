@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { DrumTuner } from "@/components/tuner/DrumTuner";
 
 export const Route = createFileRoute("/tuners/drums")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Drum Tuner — Instrumento" },
