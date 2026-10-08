@@ -3,6 +3,7 @@ import { createSession, json, sessionCookie, verifyPassword } from "@/lib/auth.s
 import { db } from "@/lib/db.server";
 
 export const Route = createFileRoute("/api/auth/login")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request }) => {

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SongBrowser } from "@/components/songs/SongBrowser";
 
 export const Route = createFileRoute("/songs/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Songs — English, Nepali & Hindi Chords | Instrumento" },

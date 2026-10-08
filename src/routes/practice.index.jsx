@@ -4,6 +4,7 @@ import { DRUM_LESSONS } from "@/lib/practice/drumLessons";
 import { PRACTICE_CHALLENGES } from "@/lib/practice/challenges";
 
 export const Route = createFileRoute("/practice/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Practice — Instrumento" },

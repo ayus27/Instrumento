@@ -10,6 +10,7 @@ import { createTanStackListToolsHandler } from "@lovable.dev/mcp-js/stacks/tanst
 import mcp from "../../lib/mcp/index";
 
 export const Route = createFileRoute("/.mcp/list-tools")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       // ANY: TanStack returns SPA HTML for methods not in `handlers`; the SDK 405s instead.

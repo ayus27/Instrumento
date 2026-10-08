@@ -18,6 +18,7 @@ import {
 } from "@/lib/drums/drumKeyMap";
 
 export const Route = createFileRoute("/drums/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Drums — Instrumento" },

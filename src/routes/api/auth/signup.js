@@ -10,6 +10,7 @@ import {
 import { db } from "@/lib/db.server";
 
 export const Route = createFileRoute("/api/auth/signup")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request }) => {

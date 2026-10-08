@@ -7,6 +7,7 @@ import { useInstrument } from "@/hooks/useInstrument";
 import { controlButtonClass } from "@/components/instrument/ControlBar";
 
 export const Route = createFileRoute("/chords")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Chord Playground — Instrumento" },

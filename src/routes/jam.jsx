@@ -10,6 +10,7 @@ import { midiToName } from "@/lib/audio/notes";
 import { PIANO_KEY_OFFSETS, chordNotes, semitoneOf, shiftChord } from "@/lib/audio/pianoKeys";
 
 export const Route = createFileRoute("/jam")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Jam Mode — Instrumento" },

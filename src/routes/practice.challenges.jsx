@@ -10,6 +10,7 @@ import { useInstrument } from "@/hooks/useInstrument";
 import { usePracticeSession } from "@/hooks/usePracticeSession";
 
 export const Route = createFileRoute("/practice/challenges")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Practice Challenges — Instrumento" },

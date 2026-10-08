@@ -10,6 +10,7 @@ import {
 import { getEngine, type InstrumentId } from "@/lib/audio/engine";
 
 export const Route = createFileRoute("/recordings")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Recordings — Instrumento" },

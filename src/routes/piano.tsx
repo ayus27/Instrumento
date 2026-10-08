@@ -11,6 +11,7 @@ import { getEngine, type InstrumentId } from "@/lib/audio/engine";
 import { midiToName } from "@/lib/audio/notes";
 
 export const Route = createFileRoute("/piano")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Piano — Instrumento" },

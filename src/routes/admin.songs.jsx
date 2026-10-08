@@ -4,6 +4,7 @@ import { SAMPLE_SONGS } from "@/lib/songs/sampleSongs";
 import { controlButtonClass } from "@/components/instrument/ControlBar";
 
 export const Route = createFileRoute("/admin/songs")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Song Management Admin — Instrumento" },

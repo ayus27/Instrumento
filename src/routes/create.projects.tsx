@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Folder, Clock, Music, Plus } from "lucide-react";
 
 export const Route = createFileRoute("/create/projects")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "My Projects — Instrumento" },

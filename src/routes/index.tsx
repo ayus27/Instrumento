@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import logo from "@/assets/instrumento-wordmark.png";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Instrumento" },

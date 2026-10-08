@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { FrettedPage } from "@/components/instrument/FrettedPage";
 
 export const Route = createFileRoute("/ukulele")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Ukulele — Instrumento" },

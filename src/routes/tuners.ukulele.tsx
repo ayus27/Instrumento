@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { TunerPanel } from "@/components/tuner/TunerPanel";
 
 export const Route = createFileRoute("/tuners/ukulele")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Ukulele Tuner — Instrumento" },

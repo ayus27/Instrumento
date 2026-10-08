@@ -5,6 +5,7 @@ import { useInstrument } from "@/hooks/useInstrument";
 import { getEngine } from "@/lib/audio/engine";
 
 export const Route = createFileRoute("/grooves")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Drum Groove Generator — Instrumento" },
