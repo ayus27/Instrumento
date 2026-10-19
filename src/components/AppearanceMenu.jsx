@@ -19,11 +19,11 @@ function Swatches({ value, onChange }) {
       aria-label={c.label}
       aria-pressed={value === c.value}
       onClick={() => onChange(c.value)}
-      className="h-6 w-6 border transition-transform hover:scale-105"
+      className="h-7 w-7 rounded-full border"
       style={{
         backgroundColor: c.swatch,
-        borderColor: value === c.value ? "var(--foreground)" : "var(--panel-edge)",
-        borderWidth: value === c.value ? 2 : 1,
+        borderColor: "var(--ink)",
+        borderWidth: value === c.value ? 3 : 1.5,
       }}
     />
   ));
@@ -46,14 +46,14 @@ export function AppearanceMenu() {
     <div className="relative" ref={ref}>
       <button
         type="button"
-        className="label-mono border border-panel-edge px-2 py-1 transition-colors hover:text-foreground"
+        className="pill bg-canvas px-4 py-1.5 text-sm"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
         Appearance
       </button>
       {open && (
-        <div className="panel absolute right-0 z-50 mt-2 w-64 space-y-4 p-4">
+        <div className="panel absolute right-0 z-50 mt-2 w-64 bg-canvas space-y-4 p-4">
           <Row label="Theme">
             {THEMES.map((t) => (
               <button
@@ -61,23 +61,13 @@ export function AppearanceMenu() {
                 type="button"
                 onClick={() => setAppearance({ theme: t.value })}
                 aria-pressed={appearance.theme === t.value}
-                className="label-mono border px-2 py-1 transition-colors hover:text-foreground"
-                style={{
-                  borderColor: appearance.theme === t.value ? "var(--signal)" : "var(--panel-edge)",
-                  color: appearance.theme === t.value ? "var(--signal)" : undefined,
-                }}
+                className={`pill px-4 py-1 text-sm ${appearance.theme === t.value ? "bg-lime text-[color:var(--on-lime)]" : "bg-canvas"}`}
               >
                 {t.label}
               </button>
             ))}
           </Row>
-          <Row label="Primary color">
-            <Swatches
-              value={appearance.primary_color}
-              onChange={(v) => setAppearance({ primary_color: v })}
-            />
-          </Row>
-          <Row label="Accent color">
+          <Row label="Highlight colour">
             <Swatches
               value={appearance.accent_color}
               onChange={(v) => setAppearance({ accent_color: v })}

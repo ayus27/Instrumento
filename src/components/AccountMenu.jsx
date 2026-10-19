@@ -15,7 +15,7 @@ export function AccountMenu() {
         </Link>
         <Link
           to="/signup"
-          className="pill bg-lime px-5 py-1.5 text-sm font-medium"
+          className="pill bg-lime text-[color:var(--on-lime)] px-5 py-1.5 text-sm font-medium"
         >
           Sign up
         </Link>

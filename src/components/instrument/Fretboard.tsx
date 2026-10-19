@@ -56,7 +56,7 @@ export function Fretboard({
                       type="button"
                       aria-label={`Play ${note} on string ${open}, fret ${fret}`}
                       className="group relative h-11 border-r border-panel-edge bg-panel transition-colors first:border-l hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-signal"
-                      style={on ? { backgroundColor: "var(--signal-dim)" } : undefined}
+                      style={on ? { backgroundColor: "var(--lime)" } : undefined}
                       onPointerDown={(e) => {
                         e.currentTarget.setPointerCapture(e.pointerId);
                         onPluck(note);

@@ -17,19 +17,19 @@ function fmt(ms: number) {
 }
 
 const btn =
-  "border border-panel-edge bg-panel px-3 py-2 font-mono text-[11px] uppercase tracking-[0.14em] transition-colors hover:bg-accent disabled:opacity-40 disabled:hover:bg-panel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal";
+  "rounded-full border-[1.5px] border-ink bg-canvas px-4 py-2 text-sm transition-colors hover:bg-lime hover:text-[color:var(--on-lime)] disabled:opacity-40 disabled:hover:bg-canvas focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal";
 
 export function ControlBar({ metronome, recorder, volume, onVolume, extra }: Props) {
   const recording = recorder.state === "recording";
 
   return (
-    <div className="panel flex flex-wrap items-center gap-x-6 gap-y-4 p-4">
+    <div className="flex flex-wrap items-center gap-x-6 gap-y-4 rounded-[32px] border-[1.5px] border-ink bg-page px-5 py-3">
       <div className="flex items-center gap-2">
         <button
           type="button"
           className={btn}
           onClick={() => (recording ? recorder.stop() : recorder.start())}
-          style={recording ? { color: "var(--destructive)" } : undefined}
+          style={recording ? { backgroundColor: "var(--orange)", color: "#fff" } : undefined}
         >
           {recording ? "■ Stop" : "● Record"}
         </button>
@@ -108,7 +108,7 @@ export function ControlBar({ metronome, recorder, volume, onVolume, extra }: Pro
             value={metronome.bpm}
             onChange={(e) => metronome.setBpm(Number(e.target.value))}
             className="w-28"
-            style={{ accentColor: "var(--signal)" }}
+            style={{ accentColor: "var(--ink)" }}
             aria-label="Tempo in beats per minute"
           />
           <span className="w-8 font-mono text-xs">{metronome.bpm}</span>
@@ -124,7 +124,7 @@ export function ControlBar({ metronome, recorder, volume, onVolume, extra }: Pro
           value={Math.round(volume * 100)}
           onChange={(e) => onVolume(Number(e.target.value) / 100)}
           className="w-28"
-          style={{ accentColor: "var(--signal)" }}
+          style={{ accentColor: "var(--ink)" }}
           aria-label="Master volume"
         />
       </label>

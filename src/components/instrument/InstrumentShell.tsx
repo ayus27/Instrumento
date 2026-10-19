@@ -25,9 +25,9 @@ export function InstrumentShell({
 }: Props) {
   return (
     <div className="mx-auto w-full max-w-6xl px-5 py-8">
-      <header className="hairline flex flex-wrap items-end justify-between gap-4 pb-4">
+      <header className="flex flex-wrap items-end justify-between gap-4 pb-4">
         <div>
-          <h1 className="font-display text-4xl uppercase tracking-tight">{title}</h1>
+          <h1 className="text-5xl font-medium tracking-[-0.02em]">{title}</h1>
           <p className="label-mono mt-1">{subtitle}</p>
         </div>
         <div className="flex items-center gap-3">
@@ -51,7 +51,7 @@ export function InstrumentShell({
       {error && (
         <p
           role="alert"
-          className="mt-4 border p-3 font-mono text-xs"
+          className="mt-4 rounded-[24px] border-[1.5px] border-ink p-3 text-sm"
           style={{ borderColor: "var(--destructive)", color: "var(--destructive)" }}
         >
           {error} — click “Enable audio” to retry.
@@ -60,7 +60,7 @@ export function InstrumentShell({
 
       <div className="mt-6 space-y-6">
         {controls}
-        <div className="panel p-4">{children}</div>
+        <div className="rounded-[24px] border-[1.5px] border-ink bg-page p-5">{children}</div>
         {legend}
       </div>
     </div>

@@ -92,7 +92,7 @@ export function SiteHeader() {
                   onClick={() => setOpenGroup(openGroup === group.label ? null : group.label)}
                   onMouseEnter={() => setOpenGroup(group.label)}
                   aria-expanded={openGroup === group.label}
-                  className={`flex items-center gap-1 rounded-full px-4 py-1.5 text-sm transition-colors hover:bg-lime ${groupActive ? "bg-lime" : ""}`}
+                  className={`flex items-center gap-1 rounded-full px-4 py-1.5 text-sm transition-colors hover:bg-lime text-[color:var(--on-lime)] ${groupActive ? "bg-lime text-[color:var(--on-lime)]" : ""}`}
                 >
                   {group.label}
                   <ChevronDown className="h-3 w-3" aria-hidden />
@@ -107,8 +107,8 @@ export function SiteHeader() {
                       <Link
                         key={item.to}
                         to={item.to}
-                        className="block rounded-full px-4 py-2 text-sm transition-colors hover:bg-lime"
-                        activeProps={{ className: "bg-lime" }}
+                        className="block rounded-full px-4 py-2 text-sm transition-colors hover:bg-lime text-[color:var(--on-lime)]"
+                        activeProps={{ className: "bg-lime text-[color:var(--on-lime)]" }}
                       >
                         <div className="font-medium">{item.label}</div>
                         {item.detail && (
@@ -155,7 +155,7 @@ export function SiteHeader() {
                     key={item.to}
                     to={item.to}
                     className="pill bg-canvas px-4 py-2.5 text-sm"
-                    activeProps={{ className: "bg-lime" }}
+                    activeProps={{ className: "bg-lime text-[color:var(--on-lime)]" }}
                   >
                     {item.label}
                   </Link>
