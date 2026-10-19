@@ -7,11 +7,12 @@ export const THEMES = [
 ];
 
 export const COLORS = [
-  { value: "amber", label: "Amber", swatch: "oklch(0.76 0.16 62)" },
-  { value: "slate", label: "Slate", swatch: "oklch(0.6 0.035 250)" },
-  { value: "indigo", label: "Indigo", swatch: "oklch(0.58 0.08 275)" },
-  { value: "sage", label: "Sage", swatch: "oklch(0.64 0.055 150)" },
-  { value: "rose", label: "Rose", swatch: "oklch(0.63 0.07 15)" },
+  { value: "amber", label: "Lime", swatch: "#f3f58a" },
+  { value: "sky", label: "Blue", swatch: "#b9dcf7" },
+  { value: "grey", label: "Grey", swatch: "#d9d9d6" },
+  { value: "mint", label: "Green", swatch: "#bdeec9" },
+  { value: "pink", label: "Pink", swatch: "#f6c6d8" },
+  { value: "lilac", label: "Lilac", swatch: "#d9cdf5" },
 ];
 
 const DEFAULTS = { theme: "light", primary_color: "amber", accent_color: "amber" };

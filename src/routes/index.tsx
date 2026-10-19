@@ -62,7 +62,7 @@ function Index() {
           <Tile to="/piano" className="bg-canvas">
             <div className="flex items-start justify-between">
               <span className="text-4xl font-medium tabular-nums">4+</span>
-              <span className="pill grid h-10 w-10 place-items-center bg-lime"><ArrowUpRight className="h-5 w-5" /></span>
+              <span className="pill grid h-10 w-10 place-items-center bg-lime text-[color:var(--on-lime)]"><ArrowUpRight className="h-5 w-5" /></span>
             </div>
             <span className="mt-6 text-sm">Instruments to play</span>
           </Tile>
@@ -76,7 +76,7 @@ function Index() {
               <span className="mt-6 text-sm text-muted-foreground">{item.detail}</span>
             </Tile>
           ))}
-          <Tile to="/create" className="col-span-2 bg-lime">
+          <Tile to="/create" className="col-span-2 bg-lime text-[color:var(--on-lime)]">
             <div className="flex items-center justify-between">
               <span className="text-2xl font-medium">Studio</span>
               <span className="pill bg-canvas px-3 py-0.5 text-xs">new</span>

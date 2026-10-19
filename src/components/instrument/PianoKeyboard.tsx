@@ -38,17 +38,15 @@ export function PianoKeyboard({
             aria-label={`Play ${note}`}
             aria-pressed={on}
             data-target={target || undefined}
-            className="absolute top-0 flex h-full flex-col justify-end border border-panel-edge pb-3 transition-[transform,filter] duration-75 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-signal"
+            className="absolute top-0 flex h-full flex-col justify-end rounded-b-[14px] border-[1.5px] border-ink pb-3 transition-[transform,filter] duration-75 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-signal"
             style={{
               left: `${index * whiteWidth}%`,
               width: `${whiteWidth}%`,
               background: on
-                ? "linear-gradient(180deg, var(--key-white) 40%, var(--signal))"
-                : target
-                  ? "linear-gradient(180deg, var(--key-white) 55%, var(--signal-dim))"
-                  : "linear-gradient(180deg, var(--key-white), oklch(0.86 0.014 90))",
-              transform: on ? "translateY(2px)" : undefined,
-              boxShadow: target ? "inset 0 0 0 3px var(--signal)" : undefined,
+                ? "var(--lime)"
+                : "var(--key-white)",
+              transform: on ? "scale(0.97)" : undefined,
+              boxShadow: target ? "inset 0 0 0 3px var(--orange)" : undefined,
             }}
             onPointerDown={(e) => {
               e.currentTarget.setPointerCapture(e.pointerId);
@@ -58,8 +56,8 @@ export function PianoKeyboard({
             onPointerCancel={() => onNoteOff(note)}
             onPointerLeave={() => onNoteOff(note)}
           >
-            <span className="label-mono text-center text-key-black/50">{keyLabels[note] ?? ""}</span>
-            <span className="mt-1 text-center font-mono text-[10px] text-key-black/40">{note}</span>
+            <span className="label-mono text-center text-[color:var(--on-lime)]/60">{keyLabels[note] ?? ""}</span>
+            <span className="mt-1 text-center font-mono text-[10px] text-[color:var(--on-lime)]/45">{note}</span>
           </button>
         );
       })}
@@ -84,12 +82,14 @@ export function PianoKeyboard({
                 left: `calc(${whiteBefore * whiteWidth}% - ${whiteWidth * 0.25}%)`,
                 width: `${whiteWidth * 0.5}%`,
                 background: on
-                  ? "linear-gradient(180deg, var(--signal-dim), var(--signal))"
-                  : "linear-gradient(180deg, oklch(0.3 0.01 60), var(--key-black))",
-                transform: on ? "translateY(2px)" : undefined,
+                  ? "var(--lime)"
+                  : "var(--key-black)",
+                border: "1.5px solid var(--ink)",
+                borderRadius: "0 0 10px 10px",
+                transform: on ? "scale(0.97)" : undefined,
                 boxShadow: target
-                  ? "inset 0 0 0 3px var(--signal)"
-                  : "2px 0 5px rgba(0,0,0,0.4), -1px 0 3px rgba(0,0,0,0.2)",
+                  ? "inset 0 0 0 3px var(--orange)"
+                  : undefined,
               }}
 
               onPointerDown={(e) => {

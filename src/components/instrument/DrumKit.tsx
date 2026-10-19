@@ -34,14 +34,14 @@ export function DrumKit({ hitPads, onHit, keyLabels }: Props) {
             }`}
             style={
               on
-                ? { backgroundColor: "var(--signal)", color: "var(--primary-foreground)", transform: "scale(0.985)" }
+                ? { backgroundColor: "var(--lime)", color: "var(--on-lime)", transform: "scale(0.97)" }
                 : undefined
             }
           >
             <span className="label-mono" style={on ? { color: "inherit" } : undefined}>
               {label}
             </span>
-            <span className="font-display text-xl">{pad.label}</span>
+            <span className="text-xl font-medium">{pad.label}</span>
           </button>
         );
       })}

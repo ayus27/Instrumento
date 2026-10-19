@@ -238,107 +238,18 @@
 }
 
 /* ---------------------------------------------------------------
- * Appearance system — light/dark themes + muted primary/accent
- * options. Dark + amber is the original default and stays unchanged.
+ * Musmentor-inspired theme: beige cards, ink outlines, pastel
+ * highlight (user-selectable), orange accents. No shadows/gradients.
  * --------------------------------------------------------------- */
-
+:root,
 :root[data-theme="light"] {
-  --background: oklch(0.96 0.006 85);
-  --foreground: oklch(0.24 0.012 60);
-  --card: oklch(0.99 0.004 85);
-  --card-foreground: oklch(0.24 0.012 60);
-  --popover: oklch(0.99 0.004 85);
-  --popover-foreground: oklch(0.24 0.012 60);
-
-  --secondary: oklch(0.91 0.006 85);
-  --secondary-foreground: oklch(0.26 0.012 60);
-  --muted: oklch(0.92 0.006 85);
-  --muted-foreground: oklch(0.46 0.012 70);
-  --accent: oklch(0.9 0.008 85);
-  --accent-foreground: oklch(0.24 0.012 60);
-  --border: oklch(0.85 0.008 80);
-  --input: oklch(0.85 0.008 80);
-
-  --panel: oklch(0.98 0.004 85);
-  --panel-edge: oklch(0.86 0.008 80);
-  --key-white: oklch(0.99 0.004 90);
-  --key-black: oklch(0.28 0.01 60);
-}
-
-:root[data-theme="light"] body {
-  background-image: radial-gradient(120% 80% at 50% -10%,
-      color-mix(in oklch, var(--signal) 12%, transparent),
-      transparent 60%);
-}
-
-
-/* Primary colour choices (buttons, focus rings) */
-:root[data-primary="slate"] {
-  --primary: oklch(0.6 0.035 250);
-  --primary-foreground: oklch(0.98 0.005 250);
-  --ring: oklch(0.6 0.035 250);
-}
-
-:root[data-primary="indigo"] {
-  --primary: oklch(0.58 0.08 275);
-  --primary-foreground: oklch(0.98 0.005 275);
-  --ring: oklch(0.58 0.08 275);
-}
-
-:root[data-primary="sage"] {
-  --primary: oklch(0.64 0.055 150);
-  --primary-foreground: oklch(0.16 0.02 150);
-  --ring: oklch(0.64 0.055 150);
-}
-
-:root[data-primary="rose"] {
-  --primary: oklch(0.63 0.07 15);
-  --primary-foreground: oklch(0.98 0.005 15);
-  --ring: oklch(0.63 0.07 15);
-}
-
-/* Accent colour choices (signal highlights, active nav, meters) */
-:root[data-accent="slate"] {
-  --signal: oklch(0.64 0.04 250);
-  --signal-dim: oklch(0.42 0.03 250);
-}
-
-:root[data-accent="indigo"] {
-  --signal: oklch(0.62 0.08 275);
-  --signal-dim: oklch(0.4 0.05 275);
-}
-
-:root[data-accent="sage"] {
-  --signal: oklch(0.66 0.06 150);
-  --signal-dim: oklch(0.43 0.04 150);
-}
-
-:root[data-accent="rose"] {
-  --signal: oklch(0.66 0.075 15);
-  --signal-dim: oklch(0.44 0.05 15);
-}
-
-/* Brand mark: artwork is black-on-transparent, so invert on the dark theme. */
-.logo-mark {
-  filter: invert(1);
-}
-
-:root[data-theme="light"] .logo-mark {
-  filter: none;
-}
-/* ---------------------------------------------------------------
- * Musmentor-inspired light theme (default): beige page, ink outlines,
- * lime highlights, orange accents. No shadows or gradients.
- * --------------------------------------------------------------- */
-:root {
   --canvas: #ffffff;
   --page: #e4ddcc;
   --ink: #0b0b0b;
+  --on-lime: #0b0b0b;
   --lime: #f3f58a;
   --orange: #ea580c;
-}
 
-:root[data-theme="light"] {
   --radius: 24px;
   --background: var(--canvas);
   --foreground: var(--ink);
@@ -351,9 +262,11 @@
   --secondary: var(--page);
   --secondary-foreground: var(--ink);
   --muted: var(--page);
-  --muted-foreground: oklch(0.38 0.01 70);
+  --muted-foreground: oklch(0.4 0.01 70);
   --accent: var(--lime);
-  --accent-foreground: var(--ink);
+  --accent-foreground: var(--on-lime);
+  --destructive: var(--orange);
+  --destructive-foreground: #ffffff;
   --border: var(--ink);
   --input: var(--ink);
   --ring: var(--ink);
@@ -364,27 +277,73 @@
   --key-white: var(--canvas);
   --key-black: var(--ink);
   --shadow-soft: none;
+  --studio-surface: var(--canvas);
+  --studio-surface-elevated: var(--page);
+  --studio-border: var(--ink);
+  --studio-track: var(--canvas);
+  --studio-clip: color-mix(in oklch, var(--lime) 70%, transparent);
+  --studio-playhead: var(--orange);
+  --studio-recording: var(--orange);
 }
 
-:root[data-theme="light"] body {
-  background-image: none;
+/* Dark: same structure, inverted — warm near-black page, bone outlines. */
+:root[data-theme="dark"] {
+  --canvas: #121110;
+  --page: #1e1c19;
+  --ink: #ece6d6;
+  --muted-foreground: oklch(0.72 0.012 80);
+  --primary-foreground: #121110;
+  --key-white: #ece6d6;
+  --key-black: #121110;
+}
+
+/* Highlight colour choices — pastel tints like the default lime. */
+:root[data-accent="sky"] { --lime: #b9dcf7; }
+:root[data-accent="grey"] { --lime: #d9d9d6; }
+:root[data-accent="mint"] { --lime: #bdeec9; }
+:root[data-accent="pink"] { --lime: #f6c6d8; }
+:root[data-accent="lilac"] { --lime: #d9cdf5; }
+
+body {
+  background-image: none !important;
   background-color: var(--canvas);
+  font-variant-numeric: tabular-nums;
 }
 
-:root[data-theme="light"] .panel,
-:root[data-theme="light"] .soft-card {
-  border-width: 1.5px;
-  border-color: var(--ink);
-  backdrop-filter: none;
-  box-shadow: none;
+.panel,
+.soft-card,
+.studio-panel,
+.control-group {
+  border-width: 1.5px !important;
+  border-color: var(--ink) !important;
+  border-radius: 24px !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
 }
+.soft-card:hover { background-color: var(--page) !important; transform: translateY(-2px); }
+
+/* Calm the old uppercase mono labels into plain Space Grotesk. */
+.label-mono,
+.text-technical {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.text-display { font-weight: 500; letter-spacing: -0.02em; text-transform: none; }
+.uppercase { text-transform: none; }
 
 h1, h2, h3 {
   font-weight: 500;
   letter-spacing: -0.02em;
 }
 
-.tabular, .font-mono { font-variant-numeric: tabular-nums; }
+button:not(:disabled):active { transform: scale(0.97); }
+button { transition: transform 150ms ease-out, background-color 150ms ease-out, color 150ms ease-out; }
+
+/* Brand mark: black artwork, invert on dark. */
+.logo-mark { filter: none; }
+:root[data-theme="dark"] .logo-mark { filter: invert(1); }
 
 @utility tile {
   background-color: var(--page);
@@ -410,5 +369,5 @@ h1, h2, h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tile:hover, .pill:active { transform: none; }
+  .tile:hover, .pill:active, .soft-card:hover, button:active { transform: none !important; }
 }
