@@ -76,14 +76,13 @@ export function SiteHeader() {
 
   return (
     <header
-      className="hairline sticky top-0 z-40 backdrop-blur-sm"
-      style={{ backgroundColor: "color-mix(in oklch, var(--background) 92%, transparent)" }}
+      className="sticky top-0 z-40 bg-background px-3 pt-3 sm:px-5"
     >
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-3 px-4 py-3 sm:px-5">
+      <div className="pill mx-auto grid w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-3 bg-page px-4 py-2 sm:px-5">
         <Logo />
 
         {/* Desktop nav */}
-        <nav className="hidden min-w-0 items-center gap-1 lg:flex">
+        <nav className="hidden min-w-0 items-center justify-center gap-1 lg:flex">
           {GROUPS.map((group) => {
             const groupActive = group.items.some((i) => isActive(i.to));
             return (
@@ -93,8 +92,7 @@ export function SiteHeader() {
                   onClick={() => setOpenGroup(openGroup === group.label ? null : group.label)}
                   onMouseEnter={() => setOpenGroup(group.label)}
                   aria-expanded={openGroup === group.label}
-                  className="flex items-center gap-1 rounded-full px-3.5 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                  style={groupActive ? { color: "var(--signal)" } : undefined}
+                  className={`flex items-center gap-1 rounded-full px-4 py-1.5 text-sm transition-colors hover:bg-lime ${groupActive ? "bg-lime" : ""}`}
                 >
                   {group.label}
                   <ChevronDown className="h-3 w-3" aria-hidden />
@@ -102,15 +100,15 @@ export function SiteHeader() {
                 {openGroup === group.label && (
                   <div
                     onMouseLeave={() => setOpenGroup(null)}
-                    className="panel absolute left-0 top-full z-50 mt-1 w-52 p-1.5 shadow-lg"
+                    className="absolute left-0 top-full z-50 mt-2 w-56 rounded-[24px] border-[1.5px] border-ink p-2"
                     style={{ backgroundColor: "var(--popover)" }}
                   >
                     {group.items.map((item) => (
                       <Link
                         key={item.to}
                         to={item.to}
-                        className="block rounded-lg px-3 py-2 text-[13px] transition-colors hover:bg-accent hover:text-foreground"
-                        activeProps={{ style: { color: "var(--signal)" } }}
+                        className="block rounded-full px-4 py-2 text-sm transition-colors hover:bg-lime"
+                        activeProps={{ className: "bg-lime" }}
                       >
                         <div className="font-medium">{item.label}</div>
                         {item.detail && (
@@ -137,7 +135,7 @@ export function SiteHeader() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="panel grid h-9 w-9 place-items-center lg:hidden"
+            className="pill grid h-9 w-9 place-items-center bg-canvas lg:hidden"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
 
@@ -147,7 +145,7 @@ export function SiteHeader() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="hairline max-h-[70vh] overflow-y-auto px-4 pb-5 lg:hidden">
+        <div className="mx-auto mt-2 max-w-6xl rounded-[24px] border-[1.5px] border-ink bg-page max-h-[70vh] overflow-y-auto px-4 pb-5 lg:hidden">
           {GROUPS.map((group) => (
             <div key={group.label} className="mt-4">
               <p className="label-mono text-muted-foreground">{group.label}</p>
@@ -156,8 +154,8 @@ export function SiteHeader() {
                   <Link
                     key={item.to}
                     to={item.to}
-                    className="panel px-4 py-3 text-sm"
-                    activeProps={{ style: { color: "var(--signal)" } }}
+                    className="pill bg-canvas px-4 py-2.5 text-sm"
+                    activeProps={{ className: "bg-lime" }}
                   >
                     {item.label}
                   </Link>
