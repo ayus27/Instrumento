@@ -9,9 +9,14 @@
  */
 
 @theme inline {
-  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Grotesk", ui-sans-serif, sans-serif;
+  --color-canvas: var(--canvas);
+  --color-page: var(--page);
+  --color-ink: var(--ink);
+  --color-lime: var(--lime);
+  --color-orange: var(--orange);
 
   --radius-sm: calc(var(--radius) - 6px);
   --radius-md: calc(var(--radius) - 3px);
@@ -320,4 +325,90 @@
 
 :root[data-theme="light"] .logo-mark {
   filter: none;
+}
+/* ---------------------------------------------------------------
+ * Musmentor-inspired light theme (default): beige page, ink outlines,
+ * lime highlights, orange accents. No shadows or gradients.
+ * --------------------------------------------------------------- */
+:root {
+  --canvas: #ffffff;
+  --page: #e4ddcc;
+  --ink: #0b0b0b;
+  --lime: #f3f58a;
+  --orange: #ea580c;
+}
+
+:root[data-theme="light"] {
+  --radius: 24px;
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --card: var(--page);
+  --card-foreground: var(--ink);
+  --popover: var(--canvas);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--canvas);
+  --secondary: var(--page);
+  --secondary-foreground: var(--ink);
+  --muted: var(--page);
+  --muted-foreground: oklch(0.38 0.01 70);
+  --accent: var(--lime);
+  --accent-foreground: var(--ink);
+  --border: var(--ink);
+  --input: var(--ink);
+  --ring: var(--ink);
+  --panel: var(--page);
+  --panel-edge: var(--ink);
+  --signal: var(--orange);
+  --signal-dim: oklch(0.5 0.17 45);
+  --key-white: var(--canvas);
+  --key-black: var(--ink);
+  --shadow-soft: none;
+}
+
+:root[data-theme="light"] body {
+  background-image: none;
+  background-color: var(--canvas);
+}
+
+:root[data-theme="light"] .panel,
+:root[data-theme="light"] .soft-card {
+  border-width: 1.5px;
+  border-color: var(--ink);
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+h1, h2, h3 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.tabular, .font-mono { font-variant-numeric: tabular-nums; }
+
+@utility tile {
+  background-color: var(--page);
+  border: 1.5px solid var(--ink);
+  border-radius: 24px;
+  transition: transform 150ms ease-out;
+  &:hover { transform: translateY(-2px); }
+}
+
+@utility pill {
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  transition: transform 150ms ease-out, background-color 150ms ease-out;
+  &:active { transform: scale(0.97); }
+}
+
+@utility diamond {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--orange);
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile:hover, .pill:active { transform: none; }
 }
