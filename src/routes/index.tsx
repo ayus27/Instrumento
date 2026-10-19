@@ -1,20 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import logo from "@/assets/instrumento-wordmark.png";
+import { ArrowRight, ArrowUpRight, Circle } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "Instrumento" },
+      { title: "Instrumento — Play, learn and create music" },
       {
         name: "description",
         content:
           "Play piano, guitar, drums & ukulele. Practice lessons, challenges & ear training. Create grooves, beats & songs. Jam with backing tracks. Tune instruments.",
       },
-      { property: "og:title", content: "Instrumento" },
+      { property: "og:title", content: "Instrumento — Play, learn and create music" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       {
         property: "og:description",
-        content: "PLAY → LEARN → PRACTICE → CREATE",
+        content: "Piano, guitar, drums, ukulele, lessons and a studio — in your browser.",
       },
     ],
   }),
@@ -44,107 +46,88 @@ const TUNERS = [
 ] as const;
 
 
-function Index() {
+function Tile({ to, className = "", children }: { to: string; className?: string; children: React.ReactNode }) {
   return (
-    <div className="mx-auto w-full max-w-6xl px-5 pb-24 pt-14 sm:pt-20">
-      <section className="flex flex-col items-center text-center">
-        <img
-          src={logo}
-          alt="Instrumento"
-          className="logo-mark h-16 w-auto sm:h-24"
-          width={481}
-          height={160}
-        />
-        <h1 className="sr-only">Instrumento</h1>
-        <p className="mt-8 max-w-2xl text-display text-4xl leading-[1.1] sm:text-6xl text-foreground">
-          PLAY. CREATE. LEARN.
-        </p>
-        <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
-          Real instruments, beats, songs and music creation — directly in your browser.
-        </p>
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            to="/create"
-            className="rounded-full bg-signal px-7 py-3 text-sm font-bold text-primary-foreground transition-all hover:bg-signal-dim hover:scale-[1.02]"
-          >
-            START CREATING
-          </Link>
-          <Link
-            to="/piano"
-            className="rounded-full border border-panel-edge px-7 py-3 text-sm font-bold transition-all hover:bg-accent hover:scale-[1.02]"
-          >
-            PLAY AN INSTRUMENT
-          </Link>
-        </div>
-      </section>
-
-      <section className="mt-24">
-        <h2 className="text-display text-2xl sm:text-3xl">Instruments</h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {INSTRUMENTS.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="soft-card group relative flex items-center justify-between overflow-hidden px-6 py-8 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
-            >
-              <span className="text-display text-2xl sm:text-3xl relative z-10 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-signal">
-                {item.name}
-              </span>
-              <span className="text-technical text-right relative z-10 transition-opacity duration-200 group-hover:opacity-100 opacity-60">
-                {item.detail}
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-20">
-        <h2 className="text-display text-2xl sm:text-3xl">
-          Learn, practice &amp; create
-        </h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-          {CREATE_LEARN.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="soft-card group flex flex-col justify-between px-6 py-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
-            >
-              <span
-                className="text-display text-xl transition-transform duration-200 group-hover:-translate-y-1"
-                style={{ color: "var(--signal)" }}
-              >
-                {item.name}
-              </span>
-              <span className="text-technical mt-4">{item.detail}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-20">
-        <h2 className="text-display text-2xl sm:text-3xl">Tools</h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          {TUNERS.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="soft-card group flex flex-col justify-between px-6 py-7 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
-            >
-              <span className="text-display text-xl transition-transform duration-200 group-hover:-translate-y-1">{item.name}</span>
-              <span className="text-technical mt-4">{item.detail}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <p className="mt-20 text-center text-sm text-muted-foreground">
-        Made by your friend Ayus. Your takes live in{" "}
-        <Link to="/recordings" className="text-signal underline underline-offset-4">
-          Recordings
-        </Link>
-        .
-      </p>
-    </div>
+    <Link to={to} className={`tile flex flex-col justify-between p-5 focus-visible:outline-2 focus-visible:outline-ink ${className}`}>
+      {children}
+    </Link>
   );
 }
 
+function Index() {
+  return (
+    <div className="mx-auto w-full max-w-6xl px-5 pb-24 pt-10">
+      <section className="grid items-center gap-10 lg:grid-cols-[1.05fr_1fr]">
+        <div className="order-2 grid grid-cols-2 gap-3 lg:order-1">
+          <Tile to="/piano" className="bg-canvas">
+            <div className="flex items-start justify-between">
+              <span className="text-4xl font-medium tabular-nums">4+</span>
+              <span className="pill grid h-10 w-10 place-items-center bg-lime"><ArrowUpRight className="h-5 w-5" /></span>
+            </div>
+            <span className="mt-6 text-sm">Instruments to play</span>
+          </Tile>
+          <Tile to="/practice" className="-ml-2 mt-6">
+            <span className="text-2xl font-medium">Practice</span>
+            <span className="mt-3 text-sm text-muted-foreground">Step-by-step lessons for piano and drums</span>
+          </Tile>
+          {INSTRUMENTS.map((item, i) => (
+            <Tile key={item.to} to={item.to} className={i % 2 ? "-ml-2 bg-canvas" : ""}>
+              <span className="text-2xl font-medium">{item.name}</span>
+              <span className="mt-6 text-sm text-muted-foreground">{item.detail}</span>
+            </Tile>
+          ))}
+          <Tile to="/create" className="col-span-2 bg-lime">
+            <div className="flex items-center justify-between">
+              <span className="text-2xl font-medium">Studio</span>
+              <span className="pill bg-canvas px-3 py-0.5 text-xs">new</span>
+            </div>
+            <span className="mt-3 text-sm">Record instruments, add grooves, import audio and use your mic.</span>
+          </Tile>
+        </div>
+
+        <div className="order-1 lg:order-2">
+          <h1 className="text-5xl font-medium leading-[1.05] tracking-[-0.02em] sm:text-6xl">
+            Play, learn and create music in your browser
+          </h1>
+          <p className="mt-6 max-w-md text-base text-muted-foreground">
+            Real instruments, lessons, songs, tuners and a multi-track studio. Nothing to install.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-2">
+            <Link to="/create" className="pill inline-flex items-center gap-3 bg-ink px-7 py-3 text-sm text-canvas">
+              Start creating <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link to="/piano" className="pill inline-flex items-center gap-3 bg-page py-2 pl-6 pr-2 text-sm">
+              Play an instrument
+              <span className="pill grid h-8 w-8 place-items-center bg-canvas"><Circle className="h-3 w-3 fill-ink" /></span>
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-3 sm:grid-cols-2">
+            {[
+              { n: "6", t: "Learning tools — lessons, chords, songs, ear training and more" },
+              { n: "3", t: "Microphone tuners for guitar, ukulele and drums" },
+            ].map((s) => (
+              <div key={s.t} className="tile p-5">
+                <div className="flex items-center gap-3"><span className="diamond" /><span className="h-px flex-1 bg-ink" /></div>
+                <div className="mt-4 text-4xl font-medium tabular-nums">{s.n}</div>
+                <p className="mt-2 text-sm text-muted-foreground">{s.t}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-20">
+        <h2 className="text-3xl font-medium">Learn, practice &amp; create</h2>
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+          {[...CREATE_LEARN, ...TUNERS].map((item) => (
+            <Tile key={item.to} to={item.to}>
+              <span className="flex items-center gap-2 text-xl font-medium"><span className="diamond" />{item.name}</span>
+              <span className="mt-4 text-sm text-muted-foreground">{item.detail}</span>
+            </Tile>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}

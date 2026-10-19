@@ -14,7 +14,7 @@ export const COLORS = [
   { value: "rose", label: "Rose", swatch: "oklch(0.63 0.07 15)" },
 ];
 
-const DEFAULTS = { theme: "dark", primary_color: "amber", accent_color: "amber" };
+const DEFAULTS = { theme: "light", primary_color: "amber", accent_color: "amber" };
 const STORAGE_KEY = "instrumento.appearance";
 
 const AppearanceContext = createContext({

@@ -10,12 +10,12 @@ export function AccountMenu() {
   if (!user) {
     return (
       <div className="flex items-center gap-3">
-        <Link to="/login" className="label-mono transition-colors hover:text-foreground">
+        <Link to="/login" className="text-sm hover:underline underline-offset-4">
           Log in
         </Link>
         <Link
           to="/signup"
-          className="label-mono border border-panel-edge px-2 py-1 transition-colors hover:text-foreground"
+          className="pill bg-lime px-5 py-1.5 text-sm font-medium"
         >
           Sign up
         </Link>
