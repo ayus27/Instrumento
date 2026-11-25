@@ -78,7 +78,7 @@ export function SiteHeader() {
     <header
       className="sticky top-0 z-40 bg-background px-3 pt-3 sm:px-5"
     >
-      <div className="pill mx-auto grid w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-3 bg-page px-4 py-2 sm:px-5">
+      <div className="pill mx-auto grid w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-2 bg-page px-3 py-2 sm:gap-3 sm:px-5">
         <Logo />
 
         {/* Desktop nav */}
@@ -127,7 +127,7 @@ export function SiteHeader() {
         </nav>
         <div className="lg:hidden" />
 
-        <div className="flex items-center gap-2 justify-self-end">
+        <div className="flex shrink-0 items-center gap-1.5 justify-self-end sm:gap-2">
           <AppearanceMenu />
           <AccountMenu />
           <button

@@ -1,3 +1,4 @@
+import { passwordError } from "@/lib/auth/passwordPolicy";
 // Server-only authentication helpers: bcrypt hashing + HTTP-only cookie sessions.
 import bcrypt from "bcryptjs";
 import { db } from "./db.server";
@@ -87,8 +88,5 @@ export function validateEmail(email) {
 }
 
 export function validatePassword(password) {
-  if (typeof password !== "string" || password.length < 8) {
-    return "Password must be at least 8 characters.";
-  }
-  return null;
+  return passwordError(password);
 }

@@ -94,11 +94,14 @@ function newTrack(kind: Kind, name: string, instrumentId: InstrumentId = "piano-
 function StudioPage() {
   const [projectName, setProjectName] = useState("New Project");
   const [bpm, setBpm] = useState(110);
-  const [tracks, setTracks] = useState<Track[]>([
+  const [tracks, setTracks] = useState<Track[]>(() => [
     newTrack("instrument", "Piano", "piano-grand"),
     newTrack("groove", "Drum Machine", "drums"),
   ]);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(() => null);
+  useEffect(() => {
+    if (!selectedId && tracks.length) setSelectedId(tracks[0]!.id);
+  }, [selectedId, tracks]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [micState, setMicState] = useState<string>("idle");
@@ -324,6 +327,8 @@ function StudioPage() {
     setTracks((prev) => prev.map((t) => (t.id === id ? { ...t, ...patch } : t)));
 
   const removeTrack = (id: string) => {
+    const gone = tracks.find((t) => t.id === id);
+    if (gone?.audioUrl) URL.revokeObjectURL(gone.audioUrl);
     setTracks((prev) => prev.filter((t) => t.id !== id));
     if (selectedId === id) setSelectedId(null);
   };
@@ -342,8 +347,8 @@ function StudioPage() {
   /* ---------------- render ---------------- */
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-6 space-y-5">
-      <header className="flex flex-wrap items-center justify-between gap-4 hairline pb-4">
+    <div className="mx-auto w-full max-w-7xl overflow-x-hidden px-3 py-4 space-y-5 sm:px-4 sm:py-6">
+      <header className="flex flex-col gap-3 hairline pb-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <input
           value={projectName}
           onChange={(e) => setProjectName(e.target.value)}

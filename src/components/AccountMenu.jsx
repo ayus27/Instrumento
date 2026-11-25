@@ -9,13 +9,13 @@ export function AccountMenu() {
 
   if (!user) {
     return (
-      <div className="flex items-center gap-3">
-        <Link to="/login" className="text-sm hover:underline underline-offset-4">
+      <div className="flex items-center gap-2 sm:gap-3">
+        <Link to="/login" className="whitespace-nowrap text-sm hover:underline underline-offset-4">
           Log in
         </Link>
         <Link
           to="/signup"
-          className="pill bg-lime text-[color:var(--on-lime)] px-5 py-1.5 text-sm font-medium"
+          className="pill bg-lime text-[color:var(--on-lime)] whitespace-nowrap px-3 py-1.5 text-sm font-medium sm:px-5"
         >
           Sign up
         </Link>

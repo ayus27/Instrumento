@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Palette } from "lucide-react";
 import { COLORS, THEMES, useAppearance } from "@/lib/appearance";
 
 function Row({ label, children }) {
@@ -46,14 +47,16 @@ export function AppearanceMenu() {
     <div className="relative" ref={ref}>
       <button
         type="button"
-        className="pill bg-canvas px-4 py-1.5 text-sm"
+        className="pill flex h-9 items-center gap-2 bg-canvas px-2.5 text-sm sm:px-4"
         aria-expanded={open}
+        aria-label="Appearance"
         onClick={() => setOpen((v) => !v)}
       >
-        Appearance
+        <Palette className="h-4 w-4 sm:hidden" aria-hidden />
+        <span className="hidden sm:inline">Appearance</span>
       </button>
       {open && (
-        <div className="panel absolute right-0 z-50 mt-2 w-64 bg-canvas space-y-4 p-4">
+        <div className="panel absolute right-0 z-50 mt-2 w-[min(16rem,calc(100vw-1.5rem))] bg-canvas space-y-4 p-4">
           <Row label="Theme">
             {THEMES.map((t) => (
               <button

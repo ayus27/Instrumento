@@ -25,7 +25,8 @@ export const Route = createFileRoute("/api/auth/signup")({
         const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
         const password = body?.password;
 
-        if (!name) return json({ error: "Name is required." }, 400);
+        if (name.length < 2 || name.length > 60) return json({ error: "Name must be 2–60 characters." }, 400);
+        if (email.length > 254) return json({ error: "Enter a valid email address." }, 400);
         if (!validateEmail(email)) return json({ error: "Enter a valid email address." }, 400);
         const pwError = validatePassword(password);
         if (pwError) return json({ error: pwError }, 400);
